@@ -68,8 +68,8 @@ package body p_semantica.gcodi is
                 ocup_v := t_var(v).ocup;
                 
                 t_var(v).desp       := despl(t_proc(npr).ocup_vl);
-                t_proc(npr).ocup_vl := integer(t_proc(npr).ocup_vl)
-                                       + integer(ocup_v);
+                t_proc(npr).ocup_vl := integer(t_proc(npr).ocup_vl) +
+                                       integer(ocup_v);
                 t_var(v).desp := (t_var(v).desp+4) * (-1);
             else
                 t_var(v).desp := (t_var(v).desp*(-4)) + 8;
@@ -120,12 +120,11 @@ package body p_semantica.gcodi is
     --     identificador
         d : descr;
     begin
-      d := cons (ts,iden.id);
-      empilar(p_procs, d.np);
-      t_proc(d.np).id := iden.id;
-      t_proc(d.np).prof := consprof(ts);
-      t_proc(d.np).n_args := 0;
-
+        d := cons (ts,iden.id);
+        empilar(p_procs, d.np);
+        t_proc(d.np).id := iden.id;
+        t_proc(d.np).prof := consprof(ts);
+        t_proc(d.np).n_args := 0;
     end gc_encap_id;
 
 
@@ -356,12 +355,14 @@ package body p_semantica.gcodi is
         d : descr;
     begin
         d := cons (ts, iden.id);
+        
         case d.td is
             when dvar   => ref.ref_b := d.nv;
             when dconst => ref.ref_b := d.nc;
             when dproc  => ref.ref_p := d.np;
             when others => null;
         end case;
+        
         ref.ref_d := 0;
     end gc_ref_id;
 
@@ -375,6 +376,7 @@ package body p_semantica.gcodi is
         c, t, tc : num_var;
     begin
         dc := conscamp(ts, ref1.ref_idt, iden.id);
+        
         case ref1.ref_d is
             when 0      => t  := nova_var(ID_NUL);
                            c  := nova_const(valor(dc.dsp));
@@ -383,6 +385,7 @@ package body p_semantica.gcodi is
                            tc := nova_const(valor(dc.dsp));
                            gen_ins_suma(t, ref1.ref_d, tc);
         end case;
+        
         ref0.ref_b := ref1.ref_b;
         ref0.ref_d := t;
     end gc_ref_rec;
@@ -409,7 +412,7 @@ package body p_semantica.gcodi is
             ref.ref_b := prmb_rind.prmb_r;
             
             case prmb_rind.prmb_db is
-                when 0        => ref.ref_d := t2;
+                when 0      => ref.ref_d := t2;
                 when others => t3:=nova_var(ID_NUL);
                                gen_ins_suma(t3, prmb_rind.prmb_db, t2);
                                ref.ref_d := t3;
@@ -433,7 +436,6 @@ package body p_semantica.gcodi is
             prmb_rind.prmb_db := ref.ref_d;
             prmb_rind.prmb_d  := e.exp_res;
       end if;
-
     end gc_prmb_rind;
     
 
@@ -461,7 +463,6 @@ package body p_semantica.gcodi is
             prmb_rind0.prmb_d  := t2;
             prmb_rind0.prmb_db := prmb_rind1.prmb_db;
       end if;
-
     end gc_prmb_rind_rec;
     
 
@@ -481,6 +482,7 @@ package body p_semantica.gcodi is
             gen_ins_neg(t, e1.exp_res);
             e0.exp_res := t;
         end if;
+        
         e0.exp_d := e1.exp_d;
     end gc_e_menys_unitari;
     
@@ -505,11 +507,11 @@ package body p_semantica.gcodi is
         if e1.a = lit_str then
             t := nova_var(ID_NUL);
             t_var(t) := (tv    => t_v_lit_str, 
-                      id    => ID_NUL, 
-                      np    => cim(p_procs), 
-                      ocup  => 4,
-                      desp  => despl(e1.str), 
-                      str => e1.str);
+                         id    => ID_NUL, 
+                         np    => cim(p_procs), 
+                         ocup  => 4,
+                         desp  => despl(e1.str), 
+                         str => e1.str);
         else
             t := nova_const(valor_lit(e1));
             e0.exp_d := 0;
@@ -543,6 +545,7 @@ package body p_semantica.gcodi is
             t1 := nova_var(ID_NUL);
             gen_ins_consind(t1, e1.exp_res, e1.exp_d);
         end if;
+        
         if e2.exp_d = 0 then
             t2 := e2.exp_res;
         else
@@ -578,6 +581,7 @@ package body p_semantica.gcodi is
             t1 := nova_var(ID_NUL);
             gen_ins_consind(t1, e1.exp_res, e1.exp_d);
         end if;
+        
         if e2.exp_d = 0 then
             t2 := e2.exp_res;
         else
@@ -970,7 +974,7 @@ package body p_semantica.gcodi is
 
     procedure gc_sent_if_else (marc : in     t_atribut) is
     -- SENT_IF:
-    --     P_SENT_IF SENTS pc_else M_IF1 SENTS pc_end pc_if s_punticoma                           
+    --     P_SENT_IF SENTS pc_else M_IF1 SENTS pc_end pc_if s_punticoma
     begin
         gen_ins_etiq(marc.mcond_ef);
         desempilar(p_etiq);
@@ -985,9 +989,9 @@ package body p_semantica.gcodi is
       ec := nova_etiq;
       ef := nova_etiq;
       empilar(p_etiq, ef);
-      -- Avaluació de l'expressió
+      -- Avaluacio de l'expressio
       gen_ins_if_eq(e.exp_res, nfals, ef);
-      -- Creació de etiquetes inici de condició certa
+      -- Creacio d'tiquetes inici de condicio certa
       gen_ins_etiq(ec);
     end gc_p_sent_if;
     
@@ -1001,6 +1005,7 @@ package body p_semantica.gcodi is
                  columna  => 0, 
                  mcond_ei => ET_NUL,
                  mcond_ef => ET_NUL);
+                 
         ef := nova_etiq;
         gen_ins_goto(ef);
         marc.mcond_ef:= ef;
@@ -1031,13 +1036,13 @@ package body p_semantica.gcodi is
                 mcond_ei => ET_NUL,
                 mcond_ef => ET_NUL);
                 
-      -- Creació de les etiquetes
+      -- Creaci� de les etiquetes
       ec := nova_etiq;
       ef := nova_etiq;
       p_sent.mcond_ei := marc.mcond_ei;
       empilar(p_etiq, ef);
       
-      -- Avaluació de l'expressió
+      -- Avaluaci� de l'expressi�
       gen_ins_if_eq(e.exp_res, nfals, ef);
       gen_ins_etiq(ec);
     end gc_p_sent_while;
@@ -1052,6 +1057,7 @@ package body p_semantica.gcodi is
                  columna  => 0, 
                  mcond_ei => ET_NUL,
                  mcond_ef => ET_NUL);
+                 
         ei := nova_etiq;
         gen_ins_etiq(ei);
         marc.mcond_ei := ei;
@@ -1087,11 +1093,14 @@ package body p_semantica.gcodi is
         while not es_buida(p_params) loop
             param := cim (p_params);
             desempilar(p_params);
+            
             case param.param_d is
                when 0      => gen_ins_params (param.param_res);
-               when others => gen_ins_paramc (param.param_res, param.param_d);
+               when others => gen_ins_paramc (param.param_res,
+                                              param.param_d);
             end case;
         end loop;
+        
         gen_ins_call(ref.ref_p);
     end gc_sent_crid;
 

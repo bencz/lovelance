@@ -1,5 +1,5 @@
 with decls.dec_generals;
-use decls.dec_generals;
+use  decls.dec_generals;
 
 package decls.p_taula_noms is
     tcaracters_plena      : exception;

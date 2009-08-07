@@ -49,7 +49,7 @@ package p_semantica.missatges is
                               id1  : in     id_nom; 
                               id2  : in     t_atribut; 
                               linf : in     valor; 
-                              lsup : in     valor);                            
+                              lsup : in     valor);
                               
     -- El camp ja existeix
     procedure me_camp_existent (lin : in     natural; 
@@ -76,7 +76,7 @@ package p_semantica.missatges is
                               linf : in     valor; 
                               lsup : in     valor);
     
-    -- Tipus del límit no compatible                          
+    -- Tipus del límit no compatible
     procedure me_limit_no_comp (lin : in     natural; 
                                 col : in     natural; 
                                 id1 : in     id_nom; 
@@ -91,7 +91,7 @@ package p_semantica.missatges is
     -- No és una constant            
     procedure me_no_constant (lin : in     natural; 
                               col : in     natural; 
-                              id : in     id_nom);                             
+                              id : in     id_nom);
 
     -- El límit no és un tipus escalar
     procedure me_noescalar (lin : in     natural; 
@@ -107,7 +107,7 @@ package p_semantica.missatges is
                             col : in     natural; 
                             id  : in     id_nom);
             
-    -- El camp no existeix                
+    -- El camp no existeix
     procedure me_no_camp (lin : in     natural; 
                           col : in     natural; 
                           id1 : in     id_nom; 
@@ -118,17 +118,17 @@ package p_semantica.missatges is
                                col : in     natural; 
                                id  : in     id_nom);
     
-    -- Falten paràmetres al procediment                        
+    -- Falten paràmetres al procediment
     procedure me_falten_param (lin : in     natural; 
                                col : in     natural; 
                                id  : in     id_nom);
                                
-    -- El tipus no és un array                           
+    -- El tipus no és un array
     procedure me_no_array (lin : in     natural; 
                            col : in     natural; 
                            id  : in     id_nom);
 
-    -- Tipus no compatibles                      
+    -- Tipus no compatibles
     procedure me_tipus_no_comp (lin : in     natural; 
                                 col : in     natural; 
                                 id1 : in     id_nom; 
@@ -139,18 +139,18 @@ package p_semantica.missatges is
                           col : in     natural; 
                           id  : in     id_nom);
     
-    -- Mode de paràmetres incorrecte                      
+    -- Mode de paràmetres incorrecte
     procedure me_mode_arg (lin : in     natural; 
                            col : in     natural; 
                            id1 : in     id_nom; 
                            id2 : in     id_nom);
                       
-    -- Massa índexos a l'array          
+    -- Massa índexos a l'array
     procedure me_massa_index (lin : in     natural; 
                              col : in     natural; 
                              id  : in     id_nom);
     
-    -- Massa paràmetres al procediment                         
+    -- Massa paràmetres al procediment
     procedure me_massa_param (lin : in     natural; 
                               col : in     natural; 
                               id  : in     id_nom);
@@ -181,19 +181,19 @@ package p_semantica.missatges is
     procedure me_no_enter1 (lin : in     natural; 
                             col : in     natural);
     
-    -- El tipus subjacent no és enter                       
+    -- El tipus subjacent no és enter
     procedure me_no_enter2 (lin : in     natural; 
                             col : in     natural);
 
-    -- El tipus subjacent no és booleà                   
+    -- El tipus subjacent no és booleà
     procedure me_no_bool1 (lin : in     natural; 
                            col : in     natural);
 
-    -- El tipus subjacent no és booleà                            
+    -- El tipus subjacent no és booleà
     procedure me_no_bool2 (lin : in     natural; 
                            col : in     natural);
 
-    -- El tipus subjacent no és booleà                           
+    -- El tipus subjacent no és booleà
     procedure me_no_bool (lin : in     natural; 
                           col : in     natural);
                           
@@ -224,7 +224,7 @@ package p_semantica.missatges is
                           col : in     natural; 
                           id  : in     id_nom);
     
-    -- Tipus no compatibles                                 
+    -- Tipus no compatibles
     procedure me_assig_no_comp (lin : in     natural; 
                                 col : in     natural);
                           

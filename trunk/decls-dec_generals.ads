@@ -23,11 +23,12 @@ package decls.dec_generals is
     type num_var       is new integer range 0..MAX_VARS;
     type ndesplacament is new integer range 0..MAX_DESPLACAMENTS;
     type nambits       is new integer range -1..MAX_AMBITS;
+    type comps_array   is new integer;
     type mde_exp       is (econst, evar, eres);
     type mde_ref       is (const, var);
     type t_mode        is (mdin, mdout, mdinout);
     type t_ref         is (rvar, rproc, rprocparam, rconst);
-    type comps_array   is new integer;
+
     
     subtype indexarr   is ndesplacament;
     subtype indexarg   is ndesplacament;

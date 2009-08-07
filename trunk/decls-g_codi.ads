@@ -3,7 +3,7 @@ use  decls.dec_generals, decls.p_descripcio, decls.p_taula_simbols;
 
 package decls.g_codi is
 
-    type t_etiqueta is new integer range 0..integer'last;
+    type t_etiqueta     is new integer range 0..integer'last;
     type tipus_variable is (t_v_iden, t_v_arg, t_v_const, t_v_lit_str);
     
     type t_variable (tv : tipus_variable := t_v_iden) is
@@ -34,7 +34,7 @@ package decls.g_codi is
         record
             param_res : num_var;
             param_d   : num_var;
-    end record;
+        end record;
 
     ET_NUL   : constant t_etiqueta := 0;
     

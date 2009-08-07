@@ -27,9 +27,9 @@ package p_semantica.ctipus is
                              error   : in out boolean);
                              
     procedure ct_p_encap_rec (p_encap0 : in out t_atribut;
-                                   p_encap1 : in     t_atribut;
-                                   argum    : in     t_atribut;
-                                   error    : in out boolean);
+                              p_encap1 : in     t_atribut;
+                              argum    : in     t_atribut;
+                              error    : in out boolean);
                                    
     procedure ct_argument (argum : in out t_atribut;
                            iden0 : in     t_atribut;
@@ -64,10 +64,10 @@ package p_semantica.ctipus is
     procedure ct_decl_record (p_record : in     t_atribut);
                               
     procedure ct_p_record_rec (p_record0 : in out t_atribut;
-                                    p_record1 : in     t_atribut;
-                                    iden0     : in     t_atribut;
-                                    iden1     : in     t_atribut;
-                                    error     : in out boolean);
+                               p_record1 : in     t_atribut;
+                               iden0     : in     t_atribut;
+                               iden1     : in     t_atribut;
+                               error     : in out boolean);
                                     
     procedure ct_p_record (p_record : in out t_atribut;
                            iden0    : in     t_atribut;
@@ -122,9 +122,9 @@ package p_semantica.ctipus is
                             error     : in out boolean);
                             
     procedure ct_prmb_rind_rec (prmb_rind0 : in out t_atribut;
-                                     prmb_rind1 : in     t_atribut;
-                                     e          : in     t_atribut;
-                                     error      : in out boolean);
+                                prmb_rind1 : in     t_atribut;
+                                e          : in     t_atribut;
+                                error      : in out boolean);
                                      
     procedure ct_e_menys_unitari (e0    : in out t_atribut;
                                   e1    : in     t_atribut;
@@ -178,7 +178,6 @@ package p_semantica.ctipus is
     procedure ct_sent_crid (refer : in     t_atribut;
                             error : in out boolean);
 
-  
     err, e_previ : exception;
 
 end p_semantica.ctipus;

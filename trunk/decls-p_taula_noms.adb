@@ -1,5 +1,5 @@
 with ada.text_io, ada.characters.handling;
-use ada.text_io, ada.characters.handling;
+use  ada.text_io, ada.characters.handling;
 
 package body decls.p_taula_noms is
 
