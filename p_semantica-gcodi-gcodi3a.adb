@@ -185,13 +185,13 @@ package body p_semantica.gcodi.gcodi3a is
         new_line(f3as);
     end gen_text_i3a;
 
-    procedure gen_i3a (instr : in i3a) is
+    procedure gen_i3a (instr : in     i3a) is
     begin
         write(fi3ab, instr);
         gen_text_i3a (fi3as, instr);
     end gen_i3a;
     
-    procedure gen_ins_copia (opd, opf1 : in num_var) is
+    procedure gen_ins_copia (opd, opf1 : in     num_var) is
     begin
         gen_i3a((tins    => ins_copia,
                  opdesti => opd,
@@ -201,7 +201,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_copia;
     
-    procedure gen_ins_consind (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_consind (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins    => ins_consind,
                  opdesti => opd,
@@ -211,7 +211,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_consind;
     
-    procedure gen_ins_copiaind (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_copiaind (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins    => ins_copiaind,
                  opdesti => opd,
@@ -221,7 +221,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_copiaind;
     
-    procedure gen_ins_neg (opd, opf1 : in num_var) is
+    procedure gen_ins_neg (opd, opf1 : in     num_var) is
     begin
         gen_i3a((tins    => ins_neg,
                  opdesti => opd,
@@ -231,7 +231,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_neg;
     
-    procedure gen_ins_suma (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_suma (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins    => ins_suma,
                  opdesti => opd,
@@ -241,7 +241,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_suma;
     
-    procedure gen_ins_resta (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_resta (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins    => ins_resta,
                  opdesti => opd,
@@ -251,7 +251,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_resta;
     
-    procedure gen_ins_prod (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_prod (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins    => ins_prod,
                  opdesti => opd,
@@ -261,7 +261,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_prod;
     
-    procedure gen_ins_divisio (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_divisio (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins    => ins_divisio,
                  opdesti => opd,
@@ -271,7 +271,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_divisio;
     
-    procedure gen_ins_modul (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_modul (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins    => ins_modul,
                  opdesti => opd,
@@ -281,7 +281,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_modul;
     
-    procedure gen_ins_and (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_and (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins       => ins_and,
                  opdesti => opd,
@@ -291,7 +291,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_and;
     
-    procedure gen_ins_or (opd, opf1, opf2 : in num_var) is
+    procedure gen_ins_or (opd, opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins       => ins_or,
                  opdesti => opd,
@@ -301,7 +301,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_or;
     
-    procedure gen_ins_not (opd, opf1 : in num_var) is
+    procedure gen_ins_not (opd, opf1 : in     num_var) is
     begin
         gen_i3a((tins       => ins_not,
                  opdesti => opd,
@@ -311,7 +311,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_not;
     
-    procedure gen_ins_etiq (ope : in t_etiqueta) is
+    procedure gen_ins_etiq (ope : in     t_etiqueta) is
     begin
         gen_i3a((tins       => ins_etiq,
                  opdesti => VAR_NUL,
@@ -321,7 +321,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => ope));
     end gen_ins_etiq;
     
-    procedure gen_ins_goto (ope : in t_etiqueta) is
+    procedure gen_ins_goto (ope : in     t_etiqueta) is
     begin
         gen_i3a((tins       => ins_goto,
                  opdesti => VAR_NUL,
@@ -331,8 +331,8 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => ope));
     end gen_ins_goto;
     
-    procedure gen_ins_if_lt (opf1, opf2 : in num_var;
-                             ope        : in t_etiqueta) is
+    procedure gen_ins_if_lt (opf1, opf2 : in     num_var;
+                             ope        : in     t_etiqueta) is
     begin
         gen_i3a((tins       => ins_iflt,
                  opdesti => VAR_NUL,
@@ -342,8 +342,8 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => ope));
     end gen_ins_if_lt;
     
-    procedure gen_ins_if_leq (opf1, opf2 : in num_var;
-                              ope        : in t_etiqueta) is
+    procedure gen_ins_if_leq (opf1, opf2 : in     num_var;
+                              ope        : in     t_etiqueta) is
     begin
         gen_i3a((tins       => ins_ifleq,
                  opdesti => VAR_NUL,
@@ -353,8 +353,8 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => ope));
     end gen_ins_if_leq;
     
-    procedure gen_ins_if_eq (opf1, opf2 : in num_var;
-                             ope        : in t_etiqueta) is
+    procedure gen_ins_if_eq (opf1, opf2 : in     num_var;
+                             ope        : in     t_etiqueta) is
     begin
         gen_i3a((tins       => ins_ifeq,
                  opdesti => VAR_NUL,
@@ -364,8 +364,8 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => ope));
     end gen_ins_if_eq;
     
-    procedure gen_ins_if_neq (opf1, opf2 : in num_var;
-                              ope        : in t_etiqueta) is
+    procedure gen_ins_if_neq (opf1, opf2 : in     num_var;
+                              ope        : in     t_etiqueta) is
     begin
         gen_i3a((tins       => ins_ifneq,
                  opdesti => VAR_NUL,
@@ -375,8 +375,8 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => ope));
     end gen_ins_if_neq;
     
-    procedure gen_ins_if_geq (opf1, opf2 : in num_var;
-                              ope        : in t_etiqueta) is
+    procedure gen_ins_if_geq (opf1, opf2 : in     num_var;
+                              ope        : in     t_etiqueta) is
     begin
         gen_i3a((tins       => ins_ifgeq,
                  opdesti => VAR_NUL,
@@ -386,8 +386,8 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => ope));
     end gen_ins_if_geq;
     
-    procedure gen_ins_if_gt (opf1, opf2 : in num_var;
-                             ope        : in t_etiqueta) is
+    procedure gen_ins_if_gt (opf1, opf2 : in     num_var;
+                             ope        : in     t_etiqueta) is
     begin
         gen_i3a((tins       => ins_ifgt,
                  opdesti => VAR_NUL,
@@ -397,7 +397,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => ope));
     end gen_ins_if_gt;
     
-    procedure gen_ins_call (opp : in num_proc) is
+    procedure gen_ins_call (opp : in     num_proc) is
     begin
         gen_i3a((tins       => ins_call,
                  opdesti => VAR_NUL,
@@ -407,7 +407,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_call;
     
-    procedure gen_ins_rtn (opp : in num_proc) is
+    procedure gen_ins_rtn (opp : in     num_proc) is
     begin
         gen_i3a((tins       => ins_return,
                  opdesti => VAR_NUL,
@@ -417,7 +417,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_rtn;
     
-    procedure gen_ins_prmb (opp : in num_proc) is
+    procedure gen_ins_prmb (opp : in     num_proc) is
     begin
         gen_i3a((tins       => ins_preambul,
                  opdesti => VAR_NUL,
@@ -427,7 +427,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_prmb;
     
-    procedure gen_ins_params (opf1 : in num_var) is
+    procedure gen_ins_params (opf1 : in     num_var) is
     begin
         gen_i3a((tins       => ins_params,
                  opdesti => VAR_NUL,
@@ -437,7 +437,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opetiq  => 0));
     end gen_ins_params;
     
-    procedure gen_ins_paramc (opf1, opf2 : in num_var) is
+    procedure gen_ins_paramc (opf1, opf2 : in     num_var) is
     begin
         gen_i3a((tins       => ins_paramc,
                  opdesti => VAR_NUL,

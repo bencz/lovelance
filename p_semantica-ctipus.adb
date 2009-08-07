@@ -187,8 +187,8 @@ package body p_semantica.ctipus is
                                          tv => argum.arg_idt,
                                          nv => 0); -- 0?
             when mdin      => dcarg := (td => darg,
-                                         ta => argum.arg_idt,
-                                         na => 0); -- 0?
+                                        ta => argum.arg_idt,
+                                        na => 0); -- 0?
         end case;
 
         
@@ -210,9 +210,9 @@ package body p_semantica.ctipus is
     
 
     procedure ct_p_encap_rec (p_encap0 : in out t_atribut;
-                                   p_encap1 : in     t_atribut;
-                                   argum    : in     t_atribut;
-                                   error    : in out boolean) is
+                              p_encap1 : in     t_atribut;
+                              argum    : in     t_atribut;
+                              error    : in out boolean) is
     -- P_ENCAP:
     --     P_ENCAP s_punticoma ARGUMENT
         dcarg, dtarg : descr;
@@ -278,14 +278,14 @@ package body p_semantica.ctipus is
     end ct_argument;
     
 
-    procedure ct_mode_in (mde  : in out t_atribut) is
+    procedure ct_mode_in (mde : in out t_atribut) is
     -- MODE:
     --     pc_in
     begin
         mde := (linia    => 0,
-                 columna  => 0,
-                 a        => mode,
-                 mode_mde => mdin);
+                columna  => 0,
+                a        => mode,
+                mode_mde => mdin);
     end ct_mode_in;
     
 
@@ -294,9 +294,9 @@ package body p_semantica.ctipus is
     --     pc_out
     begin
         mde := (linia    => 0,
-                 columna  => 0,
-                 a        => mode,
-                 mode_mde => mdout);
+                columna  => 0,
+                a        => mode,
+                mode_mde => mdout);
     end ct_mode_out;
     
 
@@ -305,9 +305,9 @@ package body p_semantica.ctipus is
     --     pc_in pc_out
     begin
         mde := (linia    => 0,
-                 columna  => 0,
-                 a        => mode,
-                 mode_mde => mdinout);
+                columna  => 0,
+                a        => mode,
+                mode_mde => mdinout);
     end ct_mode_in_out;
     
 
@@ -488,10 +488,10 @@ package body p_semantica.ctipus is
     
 
     procedure ct_p_record_rec (p_record0 : in out t_atribut;
-                                    p_record1 : in     t_atribut;
-                                    iden0     : in     t_atribut;
-                                    iden1     : in     t_atribut;
-                                    error     : in out boolean) is
+                               p_record1 : in     t_atribut;
+                               iden0     : in     t_atribut;
+                               iden1     : in     t_atribut;
+                               error     : in out boolean) is
     -- P_RECORD:
     --     P_RECORD identificador s_dospunts identificador s_punticoma
     
@@ -746,7 +746,8 @@ package body p_semantica.ctipus is
         
         nind := comps_array(di.dt.lsup - di.dt.linf + 1);
         p_array0.arr_ncomp := p_array1.arr_ncomp * nind;
-        p_array0.arr_b := p_array1.arr_b * despl(nind) + despl(di.dt.linf);
+        p_array0.arr_b     := p_array1.arr_b * despl(nind) +
+                              despl(di.dt.linf);
         
         exception
             when err     => error := true;
@@ -958,16 +959,19 @@ package body p_semantica.ctipus is
                            refer.ref_tsub := dtid.dt.ts;
                            refer.ref_idt  := d.tv;
                            refer.ref_mde  := var;
+                           
             when dconst => refer.ref_tip  := rconst;
                            dtid           := cons (ts, d.tc);
                            refer.ref_tsub := dtid.dt.ts;
                            refer.ref_idt  := d.tc;
                            refer.ref_mde  := const;
+                           
             when darg   => refer.ref_tip  := rconst;
                            dtid           := cons (ts, d.ta);
                            refer.ref_tsub := dtid.dt.ts;
                            refer.ref_idt  := d.ta;
                            refer.ref_mde  := const;
+                           
             when dproc  => refer.ref_tip  := rproc;
                            --refer.ref_idt  := ID_NUL;
                            --refer.ref_mde  := const;
@@ -978,6 +982,7 @@ package body p_semantica.ctipus is
                            --else
                            --    refer.ref_tsub := tsnul;
                            --end if;
+                           
             when others  => -- Identificador no existent
                             raise err;
         end case;
@@ -1073,7 +1078,7 @@ package body p_semantica.ctipus is
                                raise err;
                            end if;
                            refer.ref_tip  := prmb_rind.prmb_tr;
-                           refer.ref_idb  := prmb_rind.prmb_idb;                           
+                           refer.ref_idb  := prmb_rind.prmb_idb;
                            da := cons(ts, prmb_rind.prmb_idt);
                            refer.ref_idt  := da.dt.tcomp;
                            dcamp := cons(ts, da.dt.tcomp);
@@ -1241,9 +1246,9 @@ package body p_semantica.ctipus is
     
 
     procedure ct_prmb_rind_rec (prmb_rind0 : in out t_atribut;
-                                     prmb_rind1 : in     t_atribut;
-                                     e          : in     t_atribut;
-                                     error      : in out boolean) is
+                                prmb_rind1 : in     t_atribut;
+                                e          : in     t_atribut;
+                                error      : in out boolean) is
     -- PRMB_RIND:
     --     PRMB_RIND s_coma E
         dti, dcarg, dt : descr;
@@ -1263,7 +1268,7 @@ package body p_semantica.ctipus is
                        prmb_p     => PROC_NUL);
 
         case prmb_rind1.prmb_tr is
-            when rvar | 
+            when rvar |
                  rconst => if not esvalidarr (prmb_rind1.prmb_idxar) then
                                -- Massa índexos a l'array
                                me_massa_index (prmb_rind1.linia, 
@@ -1438,8 +1443,7 @@ package body p_semantica.ctipus is
         case refer.ref_tip is
             when rvar   => e.exp_mde := evar;
             when rconst => e.exp_mde := econst;
-            when others => -- Referència no permesa
-                           raise err;
+            when others => raise err;         -- Referència no permesa
         end case;
         
         e.exp_idt  := refer.ref_idt;

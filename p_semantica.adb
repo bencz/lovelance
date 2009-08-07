@@ -1,8 +1,8 @@
 with p_semantica.missatges, p_semantica.ctipus,
-     p_semantica.gcodi, ada.Text_IO;
+     p_semantica.gcodi,     ada.Text_IO;
 
 use  p_semantica.missatges, p_semantica.ctipus,
-     p_semantica.gcodi, ada.Text_IO;
+     p_semantica.gcodi,     ada.Text_IO;
 
 package body p_semantica is
 

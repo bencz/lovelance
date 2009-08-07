@@ -1,4 +1,3 @@
---with ada.Text_IO; use ada.Text_IO;
 package body decls.p_taula_simbols is
 
     procedure tbuida (ts:    out t_taula_simbols) is

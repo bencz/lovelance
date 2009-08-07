@@ -10,13 +10,15 @@ package decls.p_i3a is
                        ins_paramc,   ins_call,    ins_return,
                        ins_preambul, ins_iflt,    ins_ifleq,
                        ins_ifeq,     ins_ifneq,   ins_ifgeq,
-                       ins_ifgt,     ins_or,      ins_and, ins_not);
+                       ins_ifgt,     ins_or,      ins_and,
+                       ins_not);
 
-    type i3a is record
-        tins   : rep_instr;
-        opproc : num_proc;
-        opf1, opf2, opdesti : num_var;
-        opetiq : t_etiqueta;
-    end record;
+    type i3a is
+        record
+            tins   : rep_instr;
+            opproc : num_proc;
+            opf1, opf2, opdesti : num_var;
+            opetiq : t_etiqueta;
+        end record;
 
 end decls.p_i3a;
