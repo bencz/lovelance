@@ -1,5 +1,5 @@
-with decls.dec_generals, decls.g_codi;
-use  decls.dec_generals, decls.g_codi;
+with decls.dec_generals, decls.d_codi;
+use  decls.dec_generals, decls.d_codi;
 
 package decls.p_i3a is
 

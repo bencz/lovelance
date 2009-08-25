@@ -1,5 +1,5 @@
-with decls.dec_generals, decls.g_codi, decls.p_pila;
-use  decls.dec_generals, decls.g_codi;
+with decls.dec_generals, decls.d_codi, decls.p_pila;
+use  decls.dec_generals, decls.d_codi;
 
 package p_semantica.gcodi is
 

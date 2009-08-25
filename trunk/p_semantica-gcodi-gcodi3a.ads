@@ -1,8 +1,9 @@
 with decls.dec_generals, decls.p_i3a,
      ada.sequential_io,  ada.text_io,
-     decls.g_codi;
+     decls.d_codi, decls.p_f_c3a_binari;
 use  decls.dec_generals, decls.p_i3a,
-     decls.g_codi,       ada.text_io;
+     decls.d_codi,       ada.text_io,
+     decls.p_f_c3a_binari;
 
 package p_semantica.gcodi.gcodi3a is
 
@@ -47,10 +48,7 @@ package p_semantica.gcodi.gcodi3a is
 
 private
 
-    package p_f_c3a_binari is new ada.sequential_io (i3a);
-    use p_f_c3a_binari;
-
     fi3as: ada.text_io.file_type;
-    fi3ab: p_f_c3a_binari.file_type;
+    fi3ab: decls.p_f_c3a_binari.file_type;
 
 end p_semantica.gcodi.gcodi3a;
