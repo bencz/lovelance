@@ -1,7 +1,7 @@
 with decls.dec_generals, decls.p_descripcio, decls.p_taula_simbols;
 use  decls.dec_generals, decls.p_descripcio, decls.p_taula_simbols;
 
-package decls.g_codi is
+package decls.d_codi is
 
     type t_etiqueta     is new integer range 0..integer'last;
     type tipus_variable is (t_v_iden, t_v_arg, t_v_const, t_v_lit_str);
@@ -38,4 +38,4 @@ package decls.g_codi is
 
     ET_NUL   : constant t_etiqueta := 0;
     
-end decls.g_codi;
+end decls.d_codi;

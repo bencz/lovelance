@@ -1,9 +1,9 @@
 with decls.dec_generals,    decls.p_descripcio,
      decls.p_taula_simbols, decls.p_taula_noms,
-     decls.g_codi;
+     decls.d_codi;
      
 use decls.dec_generals,    decls.p_descripcio,
-    decls.p_taula_simbols, decls.g_codi;
+    decls.p_taula_simbols, decls.d_codi;
 
 package decls.p_atributs is
     
