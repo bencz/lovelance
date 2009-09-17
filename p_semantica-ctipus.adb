@@ -11,7 +11,7 @@ package body p_semantica.ctipus is
     
         indxarg : indexarg;
     begin
-        if decl_prog.id = ID_NUL then --puede darse el caso?
+        if decl_prog.id = ID_NUL then
             raise e_previ;
         end if;
     
@@ -39,7 +39,6 @@ package body p_semantica.ctipus is
     --     pc_begin M_DECL_PROG
     --       SENTS
     --     pc_end identificador s_punticoma
-    dp : descr;
     begin
         decl_prog := (linia   => encap.linia,
                       columna => encap.columna,
@@ -55,7 +54,6 @@ package body p_semantica.ctipus is
             -- Identificadors diferents
             raise err;
         end if;
-        dp:= cons(ts, ident.id);
         
         exception
             when err     => me_difer_id (decl_prog.linia,
@@ -92,7 +90,6 @@ package body p_semantica.ctipus is
         
         encap.id := iden.id;
         entrabloc(ts);
-        dp:= cons(ts, iden.id);
         
         exception
             when err => me_id_exist (iden.linia,
@@ -112,6 +109,7 @@ package body p_semantica.ctipus is
         idarg   : id_nom;
         e       : boolean;
     begin
+        entrabloc(ts);
         encap := (linia   => p_encap.linia,
                   columna => p_encap.columna,
                   a       => id,
@@ -121,13 +119,12 @@ package body p_semantica.ctipus is
             raise e_previ;
         end if;
         
-        entrabloc(ts); --aqui o al principio del todo?
         indxarg := primerarg (ts, p_encap.id);
         
         while esvalidarg (indxarg) loop
+            nv := nv + 1;
             consarg (ts, indxarg, idarg, darg);
             
-            nv := nv + 1;
             if darg.td = dvar then
                 darg.nv := nv;
             else
@@ -157,7 +154,7 @@ package body p_semantica.ctipus is
         p_encap := (linia   => iden.linia,
                     columna => iden.columna,
                     a       => id,
-                    id      => ID_NUL);
+                    id      => iden.id);
     
         np := np + 1;
         dp := (td => dproc,
@@ -185,12 +182,11 @@ package body p_semantica.ctipus is
             when mdout    |
                  mdinout    => dcarg := (td => dvar,
                                          tv => argum.arg_idt,
-                                         nv => 0); -- 0?
+                                         nv => 0);
             when mdin      => dcarg := (td => darg,
                                         ta => argum.arg_idt,
-                                        na => 0); -- 0?
+                                        na => 0);
         end case;
-
         
         posaarg (ts, iden.id, argum.arg_idarg, dcarg, e);
         if e then
@@ -202,8 +198,6 @@ package body p_semantica.ctipus is
             raise err;
         end if;
         
-        p_encap.id := iden.id;
-
         exception
             when err => error := true;
     end ct_p_encap_id;
@@ -223,7 +217,7 @@ package body p_semantica.ctipus is
                      a       => id,
                      id      => p_encap1.id);
                      
-        if p_encap1.id = ID_NUL then
+        if p_encap0.id = ID_NUL then
             raise e_previ;
         end if;
     
@@ -240,17 +234,17 @@ package body p_semantica.ctipus is
             when mdout    |
                  mdinout   => dcarg := (td => dvar,
                                         tv => argum.arg_idt,
-                                        nv => 0); -- 0?
+                                        nv => 0);
             when mdin      => dcarg := (td => darg,
                                         ta => argum.arg_idt,
-                                        na => 0); -- 0?
+                                        na => 0);
         end case;
         
         posaarg (ts, p_encap0.id, argum.arg_idarg, dcarg, e);
         if e then
             -- Argument existent
-            me_arg_exist (argum.linia,
-                          argum.columna,
+            me_arg_exist (p_encap1.linia,
+                          p_encap1.columna,
                           argum.arg_idarg,
                           p_encap1.id);
             raise err;
@@ -355,8 +349,8 @@ package body p_semantica.ctipus is
                        columna => iden.columna,
                        a       => var,
                        var_idt => iden.id);
+                       
         d := cons(ts, iden.id);
-        
         if d.td /= dtipus then
             -- No existeix el tipus
             raise err;
@@ -415,7 +409,6 @@ package body p_semantica.ctipus is
     --     op_assignacio literal s_punticoma
     
         d, dc : descr;
-        dt    : descr_tipus;
         e     : boolean;
     begin
         d := cons(ts, iden1.id);
@@ -428,8 +421,7 @@ package body p_semantica.ctipus is
             raise err;
         end if;
         
-        dt := d.dt;
-        if dt.ts > tsent then
+        if d.dt.ts > tsent then
             -- No es un tipus escalar
             me_no_escalar (iden1.linia,
                            iden1.columna,
@@ -437,7 +429,7 @@ package body p_semantica.ctipus is
             raise err;
         end if;
         
-        if dt.ts /= tsub_lit(liter) then
+        if d.dt.ts /= tsub_lit(liter) then
             -- Tipus subjacent no compatible
             me_t_sub (iden1.linia,
                       iden1.columna,
@@ -446,20 +438,19 @@ package body p_semantica.ctipus is
             raise err;
         end if;
         
-        if valor_lit(liter) < dt.linf or
-           valor_lit(liter) > dt.lsup then
+        if valor_lit(liter) < d.dt.linf or
+           valor_lit(liter) > d.dt.lsup then
             -- Valor fora dels límits
             me_fora_limits (iden1.linia,
                             iden1.columna,
                             iden1.id,
                             liter,
-                            dt.linf,
-                            dt.lsup);
+                            d.dt.linf,
+                            d.dt.lsup);
             raise err;
         end if;
         
-        nv := nv + 1;
-        
+        nv := nv + 1;      
         dc := (td => dconst,
                tc => iden1.id,
                vc => valor_lit(liter),
@@ -619,10 +610,9 @@ package body p_semantica.ctipus is
         end if;
         
         dta := cons(ts, p_array.arr_ida);
-        dta.dt.tcomp := iden.id;
         dta.dt.ocup  := despl(integer(dta.dt.ocup) *
                               integer(p_array.arr_ncomp));
-        
+        dta.dt.tcomp := iden.id;        
         actualitza(ts, p_array.arr_ida, dta);
         
         exception
@@ -688,14 +678,8 @@ package body p_semantica.ctipus is
             raise err;
         end if;
         
-        --posaindex (ts, iden0.id, iden1.id);        
-        --p_array.arr_ida   := iden0.id;
-        --p_array.arr_ncomp := comps_array(di.dt.lsup - di.dt.linf + 1);
-        --falta guardar la base de cada index
         p_array.arr_b := despl (di.dt.linf);
         p_array.arr_ncomp := comps_array(di.dt.lsup - di.dt.linf + 1);
-        
---        posaindex (ts, iden0.id, iden1.id, di);
         posaindex (ts, iden0.id, iden1.id, di);
         
         exception
@@ -741,7 +725,6 @@ package body p_semantica.ctipus is
             raise err;
         end if;
         
---        posaindex (ts, p_array1.arr_ida, iden.id, di);
         posaindex (ts, p_array1.arr_ida, iden.id, di);
         
         nind := comps_array(di.dt.lsup - di.dt.linf + 1);
@@ -923,6 +906,7 @@ package body p_semantica.ctipus is
         
         lim.limit_tsub := tsub_lit(lit);
         lim.limit_val  := valor_lit(lit);
+        lim.limit_idt  := ID_NUL;
         
         exception
             when err => error := true;
@@ -973,15 +957,6 @@ package body p_semantica.ctipus is
                            refer.ref_mde  := const;
                            
             when dproc  => refer.ref_tip  := rproc;
-                           --refer.ref_idt  := ID_NUL;
-                           --refer.ref_mde  := const;
-                           --ind            := primerarg (ts, iden.id);
-                           
-                           --if esvalidarg(ind) then
-                           --    refer.ref_tsub := tsarr;
-                           --else
-                           --    refer.ref_tsub := tsnul;
-                           --end if;
                            
             when others  => -- Identificador no existent
                             raise err;
@@ -1004,19 +979,10 @@ package body p_semantica.ctipus is
     
         d, dcamp, dtcamp : descr;
     begin
---        refer0 := (linia    => iden.linia,
---                   columna  => iden.columna,
---                   a        => ref,
---                   ref_idb  => refer1.ref_idb,
---                   ref_tip  => refer1.ref_tip,
---                   ref_idt  => ID_NUL,
---                   ref_tsub => tsnul,
---                   ref_mde  => refer1.ref_mde);
-
         if refer1.ref_idt = ID_NUL then
             raise e_previ;
         end if;
-
+        
         d := cons (ts, refer1.ref_idt);    
         if d.dt.ts /= tsrec then
             -- No és un tipus record
@@ -1027,7 +993,6 @@ package body p_semantica.ctipus is
         end if;
 
         dcamp := conscamp (ts, refer1.ref_idt, iden.id);
-        --put_line("ct_ref_rec " & "dcamp es del tipo " & dcamp.td'img);
 
         if dcamp.td = dnul_la then
             -- El camp no existeix
@@ -1070,15 +1035,20 @@ package body p_semantica.ctipus is
                   ref_p    => PROC_NUL);
 
         case prmb_rind.prmb_tr is
-            when rvar   => if esvalidarr (prmb_rind.prmb_idxar) then
+            when rvar   => 
+                           if esvalidarr (prmb_rind.prmb_idxar) then
                                -- Falten índexos a l'array
                                me_falten_index (prmb_rind.linia, 
                                                 prmb_rind.columna, 
                                                 prmb_rind.prmb_idb);
                                raise err;
                            end if;
+                           
                            refer.ref_tip  := prmb_rind.prmb_tr;
                            refer.ref_idb  := prmb_rind.prmb_idb;
+                           if prmb_rind.prmb_idt = ID_NUL then
+            		       raise e_previ;
+            		   end if;
                            da := cons(ts, prmb_rind.prmb_idt);
                            refer.ref_idt  := da.dt.tcomp;
                            dcamp := cons(ts, da.dt.tcomp);
@@ -1112,9 +1082,10 @@ package body p_semantica.ctipus is
                             
             when others => raise err;
         end case;
-        
+
         exception
-            when err => error := true;
+            when err     => error := true;
+            when e_previ => null;
     end ct_ref_prmb_rind;
     
 
@@ -1307,54 +1278,55 @@ package body p_semantica.ctipus is
                                                prmb_rind1.columna, 
                                                prmb_rind1.prmb_idb);
                                raise err;
-                         end if;
+                           end if;
+
+                           consarg (ts, prmb_rind1.prmb_idxag, idarg, dcarg);
+                           if dcarg.td = dvar then
+                               ta := dcarg.tv;
+                           elsif dcarg.td = darg then
+                               ta := dcarg.ta;
+                           else
+                               raise e_previ;
+                           end if;
                          
-                         consarg (ts, prmb_rind1.prmb_idxag, idarg, dcarg);
-                         if dcarg.td = dvar then
-                             ta := dcarg.tv;
-                         elsif dcarg.td = darg then
-                             ta := dcarg.ta;
-                         else
-                             raise e_previ;
-                         end if;
-             
-                         dt := cons (ts, ta);
-                         if e.exp_tsub /= dt.dt.ts then
-                             -- Tipus subjacent no compatibles
-                             me_no_compatibles (e.linia, 
+                           dt := cons (ts, ta);
+                           consindex (ts, prmb_rind1.prmb_idxar, di, dti);
+                           if e.exp_tsub /= dt.dt.ts then
+                               -- Tipus subjacent no compatibles                               
+                               me_no_compatibles (e.linia, 
+                                                  e.columna, 
+                                                  e.exp_idb, 
+                                                  di);
+                               raise err;
+                           end if;
+                           
+                           if e.exp_idt /= ID_NUL then
+                               if e.exp_idt /= ta then
+                                   -- Tipus no compatibles
+                                   me_tipus_no_comp (e.linia, 
+                                                     e.columna, 
+                                                     e.exp_idt, 
+                                                     idarg);
+                                   raise err;
+                               end if;
+                           end if;
+                           
+                           if dcarg.td = dvar then
+                               if e.exp_mde /= evar then
+                                   -- Mode de paràmetres incorrecte
+                                   me_mode_arg (e.linia, 
                                                 e.columna, 
-                                                e.exp_idb, 
-                                                di);
-                             raise err;
-                         end if;
+                                                prmb_rind1.prmb_idb, 
+                                                idarg);
+                                   raise err;
+                               end if;
+                           end if;
                          
-                         if e.exp_idt /= ID_NUL then
-                             if e.exp_idt /= ta then
-                                 -- Tipus no compatibles
-                                 me_tipus_no_comp (e.linia, 
-                                                   e.columna, 
-                                                   e.exp_idt, 
-                                                   idarg);
-                                 raise err;
-                             end if;
-                         end if;
-                         
-                         if dcarg.td = dvar then
-                             if e.exp_mde /= evar then
-                                 -- Mode de paràmetres incorrecte
-                                 me_mode_arg (e.linia, 
-                                              e.columna, 
-                                              prmb_rind1.prmb_idb, 
-                                              idarg);
-                                 raise err;
-                             end if;
-                         end if;
-                         
-                         prmb_rind0.prmb_idxag := succarg (ts, prmb_rind1.prmb_idxag);
+                           prmb_rind0.prmb_idxag := succarg (ts, prmb_rind1.prmb_idxag);
                          
             when others => raise err;
         end case;
-        
+
         exception
             when err     => error := true;
             when e_previ => null;
@@ -1474,30 +1446,28 @@ package body p_semantica.ctipus is
                exp_mde  => eres,
                exp_res  => VAR_NUL,
                exp_d    => 0);
-    
+                 
         if e1.exp_tsub /= e2.exp_tsub then
             -- Tipus subjacents no compatibles
             me_no_compatibles (e1.linia,
-                               e1.columna,
-                               e1.exp_idt,
-                               e2.exp_idt);
+                               e1.columna);
             raise err;
         end if;
-    
+
         if e1.exp_tsub > tsent then
             -- El tipus subjacent no és escalar
             me_no_escalar (e1.linia,
                            e1.columna);
             raise err;
         end if;
-        
+
         if e2.exp_tsub > tsent then
             -- El tipus subjacent no és escalar
             me_no_escalar (e2.linia,
                            e2.columna);
             raise err;
         end if;
-        
+
         if e1.exp_idt /= ID_NUL and e2.exp_idt /= ID_NUL then
             if e1.exp_idt /= e2.exp_idt then
                 -- Tipus dels operands no compatibles
@@ -1506,7 +1476,7 @@ package body p_semantica.ctipus is
                 raise err;
             end if;
         end if;
-        
+
         if e1.exp_mde = econst and e2.exp_mde = econst then
             e0.exp_mde := econst;
         end if;
@@ -1772,12 +1742,9 @@ package body p_semantica.ctipus is
     --     REF s_punticoma
         indxarg : indexarg;
     begin
-        --put_line("ct_sent_crid");
         if refer.ref_tip = rproc then
-            --put_line("if refer.ref_tip = rproc then");
             indxarg := primerarg (ts, refer.ref_idb);
             if esvalidarg (indxarg) then
-                --put_line("if esvalidarg (indxarg) then");
                 -- Procediment declarat amb arguments i cridat sense
                 me_param (refer.linia, 
                           refer.columna, 
@@ -1785,9 +1752,7 @@ package body p_semantica.ctipus is
                 raise err;
             end if;            
         else
-            --put_line("else");
             if refer.ref_tip /= rprocparam then
-                --put_line("if refer.ref_tip /= rprocparam then");
                 -- No és un procediment
                 me_no_proc (refer.linia, 
                             refer.columna, 

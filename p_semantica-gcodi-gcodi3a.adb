@@ -57,14 +57,14 @@ package body p_semantica.gcodi.gcodi3a is
     procedure escriu_procediment (f3as : in     ada.text_io.file_type;
                                   np   : in     num_proc) is
     begin
-        put(f3as,"_"&consulta(tn, t_proc(np).id));
+        put(f3as, "_" & consulta(tn, t_proc(np).id));
         if t_proc(np).id_int /= 0 then
             put(f3as, "(");
             escriu_etiqueta(f3as, t_proc(np).id_int);
             put(f3as, ")");
         end if;
     end escriu_procediment;
-
+    
     procedure gen_text_i3a (f3as  : in     ada.text_io.file_type;
                             instr : in     i3a) is
     begin

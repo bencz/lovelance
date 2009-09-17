@@ -89,9 +89,9 @@ package body p_semantica.missatges is
 
     -- Tipus subjacent no compatible
     procedure me_t_sub (lin : in     natural; 
-                           col : in     natural; 
-                           id1 : in     id_nom; 
-                           id2 : in     t_atribut) is
+                        col : in     natural; 
+                        id1 : in     id_nom; 
+                        id2 : in     t_atribut) is
     begin
         me_posicio (lin, col);
         put_line (f_missatges, "el tipus subjacent de '" & consulta (tn, id1) 
@@ -341,8 +341,8 @@ package body p_semantica.missatges is
                               id  : in     id_nom) is
     begin
         me_posicio (lin, col);
-        put_line (f_missatges, "el procediment '" & consulta (tn, id) & 
-                  "' te mes parametres efectius que formals.");
+        put_line (f_missatges, "el procediment '" & 
+                  consulta (tn, id) & "' te massa parametres.");
     end me_massa_param;
 
 
@@ -480,7 +480,7 @@ package body p_semantica.missatges is
     begin
         me_posicio (lin, col);
         put_line (f_missatges, "incompatibilitat de " &
-                  "tipus subjacent en l'assignacio.");
+                  "tipus subjacent dels operands.");
     end me_no_compatibles;
 
     

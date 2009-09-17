@@ -242,8 +242,6 @@ E:
     {rs_op_not($$, $2);}
   | E pc_mod E
     {rs_op_mod($$, $1, $3);}
-    
-    -- Afegir literals i referències
   ;
   
 SENTS:
