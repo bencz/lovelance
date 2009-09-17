@@ -1,0 +1,48 @@
+procedure FrasePalindrom is
+    type subrang is new integer range 1..100;
+    type contingut is array (subrang) of character;
+    type frase is record
+        cont: contingut;
+        long: subrang;
+    end record;
+
+    f: frase;
+    c: character;
+    palindrom: boolean;
+
+    procedure llegirfrase is
+    begin
+        getc(c);
+        f.long:=0;
+        while c/='.' loop
+            if c/=' ' then
+                f.long:=f.long+1;
+                f.cont(f.long):=c;
+            end if;
+            getc(c);
+        end loop;
+    end llegirfrase;
+    
+    procedure mirarsilafraseespalindrom is
+        i, j: subrang;
+    begin
+        palindrom:=false;
+        i:=1;
+        j:=f.long;
+        while f.cont(i)=f.cont(j) and i<(j-2) loop
+            i:=i+1;
+            j:=j-1;
+        end loop;
+        palindrom:= f.cont(i)=f.cont(j);
+    end mirarsilafraseespalindrom;
+    
+    begin
+        llegirfrase;
+        mirarsilafraseespalindrom;
+        new_line;
+        if palindrom then 
+            puts("La frase es un palindrom");
+        else 
+            puts("La frase no es un palindrom");
+        end if;
+end frasepalindrom;

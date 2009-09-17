@@ -1,0 +1,88 @@
+procedure prova is
+    i, j, k : integer;
+    car : character;
+    const : constant integer := 50;
+    b, d : boolean;
+    
+    procedure suma (a : in      integer; 
+                           b : in      integer; 
+                           c :    out integer) is
+    begin
+        c := a + b;
+    end suma;
+    
+    procedure noarguments is
+    begin
+        new_line;
+    end noarguments;
+    
+    type subrang is new integer range 1 .. const;
+    type unidimensional is array (subrang) of integer;
+    type multidimensional is array (subrang, subrang) of integer;
+    type registre is record
+        camp1 : unidimensional;
+        camp2 : integer;
+    end record;
+    
+    taula1 : unidimensional;
+    taula2 : multidimensional;
+    rec : registre;
+    index : subrang;
+    
+begin
+    geti(i);
+    getc(car);
+    new_line;
+    puti(i);
+    putc(car);
+    puti(10);
+    putc('a');
+    puts("Hola Mundo!");
+    
+    index := 5;
+    taula1(index) := 10; 
+    rec.camp2 := 10;
+    
+    i := 1;
+    i := -i;
+    i := i + 1;
+    i := i - 1;
+    i := i * i;
+    i := i / i;
+    i := i mod i;
+    i := i*10+j*2-(30*i-15*2*j);
+    
+    suma(i, j, k);
+    noarguments;
+    
+    b := i > 10;
+    b := i >= 10;
+    b := i < 10;
+    b := i <= 10;
+    b := i = 10;
+    b := i /= 10;
+    b := b and d;
+    b := b or d;
+    b := not d;
+    
+    
+    if b then
+        puti(i);
+    end if;
+    
+    if b and not d then
+        puti(i);
+    else
+       putc(car);
+    end if;
+    
+    while (i /= 15) and not b loop
+	if d and b then
+            puti(i);
+        else
+           putc(car);
+        end if;
+        puti(i);
+	putc(car);
+    end loop;
+end prova;
