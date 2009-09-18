@@ -1290,16 +1290,13 @@ package body p_semantica.ctipus is
                            end if;
                          
                            dt := cons (ts, ta);
-                           consindex (ts, prmb_rind1.prmb_idxar, di, dti);
                            if e.exp_tsub /= dt.dt.ts then
                                -- Tipus subjacent no compatibles                               
                                me_no_compatibles (e.linia, 
-                                                  e.columna, 
-                                                  e.exp_idb, 
-                                                  di);
+                                                  e.columna);
                                raise err;
                            end if;
-                           
+
                            if e.exp_idt /= ID_NUL then
                                if e.exp_idt /= ta then
                                    -- Tipus no compatibles
