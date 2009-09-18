@@ -1,0 +1,24 @@
+procedure prova_factorial is
+   
+   procedure factorial(x: in integer; res: out integer) is
+      t: integer;
+   begin
+      t := x;
+      res := x;
+
+      while t > 1 loop
+          t := t - 1;
+          res := res * t;
+      end loop;
+   end factorial;
+
+   var, f: integer;
+
+begin
+   var := 5;
+   puts("Introdueix un nombre: ");
+   geti(var);
+   puts("Factorial: ");
+   factorial(var, f);
+   puti(f);
+end prova_factorial;

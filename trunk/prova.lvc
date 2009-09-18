@@ -37,7 +37,7 @@ begin
     putc(car);
     puti(10);
     putc('a');
-    puts("Hello World!");
+    puts("Hola Mundo!");
     
     index := 5;
     taula1(index) := 10; 
