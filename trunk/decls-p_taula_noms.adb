@@ -193,7 +193,6 @@ package body decls.p_taula_noms is
 
     -- Funcions de debugging
     procedure imprimir (taula : in t_taula_noms) is
-
         f_taula_dispersio: file_type;
         f_taula_identificadors: file_type;
         f_taula_strings: file_type;
@@ -228,7 +227,6 @@ package body decls.p_taula_noms is
         close(f_taula_dispersio);
         close(f_taula_identificadors);
         close(f_taula_caracters);
-
-      end imprimir;
+    end imprimir;
 
 end decls.p_taula_noms;

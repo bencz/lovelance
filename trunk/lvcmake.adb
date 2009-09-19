@@ -20,7 +20,7 @@ begin
     yyparse;
     p_semantica.conclou_analisi(error);
     close_input;
-
+    
     if not error then
         genera_assemblador(argument(1));
         genera_fitxer_compilacio(argument(1));
