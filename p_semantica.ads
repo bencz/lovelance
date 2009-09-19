@@ -1,8 +1,8 @@
-with decls.p_descripcio,    decls.p_taula_noms, decls.p_atributs,
-     decls.p_taula_simbols, decls.dec_generals, decls.d_codi;
+with decls.p_atributs, decls.p_taula_noms, decls.p_taula_simbols,
+     decls.dec_generals, decls.d_codi;
      
-use  decls.p_descripcio,    decls.p_taula_noms, decls.p_atributs,
-     decls.p_taula_simbols, decls.dec_generals, decls.d_codi;
+use decls.p_atributs, decls.p_taula_noms, decls.p_taula_simbols,
+     decls.dec_generals, decls.d_codi;
 
 package p_semantica is
 

@@ -5,8 +5,6 @@ package decls.p_descripcio is
 
     type valor    is new integer;
     type despl    is new integer;
---    type num_var  is new integer;
---    type num_proc is new integer;
 
     type tipus_subjacent is 
          (tsnul, tsbool, tscar, tsent, tsarr, tsrec, tsstr);

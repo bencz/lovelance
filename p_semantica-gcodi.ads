@@ -1,6 +1,9 @@
-with decls.dec_generals, decls.d_codi, decls.p_pila;
-use  decls.dec_generals, decls.d_codi;
-
+with decls.dec_generals, decls.p_descripcio, decls.d_codi, ada.text_io, 
+     decls.p_pila_etiq,  decls.p_pila_params, decls.p_pila_procs;
+     
+use  decls.dec_generals, decls.p_descripcio, decls.d_codi, 
+     decls.p_pila_etiq,  decls.p_pila_params, decls.p_pila_procs;
+     
 package p_semantica.gcodi is
 
     function nova_var (iden : in     id_nom) return num_var;
@@ -169,20 +172,13 @@ package p_semantica.gcodi is
     procedure gc_sent_crid (ref : in     t_atribut);
 
 private
-    
-    package p_pila_params is new decls.p_pila(t_param);
-    package p_pila_procs  is new decls.p_pila(num_proc);
-    package p_pila_etiq   is new decls.p_pila(t_etiqueta);
-    
-    use p_pila_params, p_pila_procs, p_pila_etiq;
-    
     type t_taula_variables    is array (num_var)  of t_variable;
     type t_taula_procediments is array (num_proc) of t_procediment;
 
     t_var  : t_taula_variables;
     t_proc : t_taula_procediments;
     
-    p_params : p_pila_params.t_pila;
-    p_procs  : p_pila_procs.t_pila;
-    p_etiq   : p_pila_etiq.t_pila;
+    p_params : decls.p_pila_params.t_pila;
+    p_procs  : decls.p_pila_procs.t_pila;
+    p_etiq   : decls.p_pila_etiq.t_pila;
 end p_semantica.gcodi;

@@ -1,11 +1,10 @@
-with lovelace_io, ada.command_line, ada.text_io, 
-     p_sintactica, ada.io_exceptions, p_semantica, 
-     p_semantica.gcodi.assemblador;
-
-use lovelace_io, ada.command_line, ada.text_io, 
-    p_sintactica, ada.io_exceptions, p_semantica, 
-    p_semantica.gcodi.assemblador;
-
+with p_sintactica, decls.p_taula_noms, decls.p_atributs, p_semantica,
+     p_semantica.gcodi.assemblador, p_lexic, lovelace_io,
+     ada.text_io, ada.command_line, ada.io_exceptions;
+     
+use p_sintactica, p_semantica.gcodi.assemblador, p_lexic, lovelace_io, 
+    ada.text_io, ada.command_line, ada.io_exceptions;
+    
 procedure lvcmake is
     error_arguments  : exception;
     error_compilacio : exception;
@@ -17,9 +16,9 @@ begin
     end if;
     
     open_input(argument(1) & ".lvc");
-    prepara_analisi(argument(1));
+    p_semantica.prepara_analisi(argument(1));
     yyparse;
-    conclou_analisi(error);
+    p_semantica.conclou_analisi(error);
     close_input;
 
     if not error then

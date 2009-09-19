@@ -1,7 +1,5 @@
-with decls.dec_generals, decls.p_i3a, 
-     ada.sequential_io,  ada.text_io; 
-
-use decls.dec_generals, decls.p_i3a, ada.text_io;
+with decls.dec_generals, ada.text_io;
+use decls.dec_generals, ada.text_io;
 
 package p_semantica.gcodi.assemblador is
 
@@ -9,7 +7,7 @@ package p_semantica.gcodi.assemblador is
     procedure genera_fitxer_compilacio (nom : in     string);
 
 private
-    fass, fbat  : file_type;
+    fass, fbat  : ada.text_io.file_type;
     proc_actual : num_proc;
 
     type tipus_insass is (movl, addl,  leal,  pushl, popl,
@@ -80,10 +78,10 @@ private
             end case;
         end record;
 
-   package p_f_c3a_binari is new ada.sequential_io (i3a);
-   use p_f_c3a_binari;
+   --package p_f_c3a_binari is new ada.sequential_io (i3a);
+   --use p_f_c3a_binari;
 
-   fi3ab: p_f_c3a_binari.file_type;
+   --fi3ab: p_f_c3a_binari.file_type;
 
 end p_semantica.gcodi.assemblador;
 

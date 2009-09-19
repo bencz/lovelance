@@ -1,3 +1,8 @@
+with decls.dec_generals, decls.d_codi, 
+     decls.p_f_c3a_binari, ada.text_io;
+use  decls.dec_generals, decls.d_codi, 
+     decls.p_f_c3a_binari, ada.text_io;
+
 package body p_semantica.gcodi.gcodi3a is
 
     procedure prepara_fitxers_codi(nom : in string) is
@@ -26,21 +31,40 @@ package body p_semantica.gcodi.gcodi3a is
                                var  : in     num_var) is
     begin
         case t_var(var).tv is
-            when t_v_iden     => if t_var(var).id = ID_NUL then
-                                    -- Es una variable temporal
-                                  if var = VAR_NUL then
-                                      put(f3as, "VAR_NUL");
-                                  else
-                                      put(f3as, "tmp_" &
+            when t_v_iden     =>  --put_line("t_var(var).id: " & t_var(var).id'img);
+                                  --put_line("id: " & id'img);
+                                  --put_line("var: " & var'img);
+                                  put_line("i - var - id - t_var(i).id");
+                                  for i in num_var loop
+                                      if t_var(i).id /= 0 then
+                                          put(i'img);
+                                          put(" - ");
+                                          put(var'img);
+                                          put(" - ");
+                                          put(id'img);
+                                          put(" - ");
+                                          put(t_var(i).id'img); 
+                                          new_line;
+                                      end if;
+                                  end loop;
+
+                                  if t_var(var).id = ID_NUL then
+                                      put_line("es temporal");
+                                      -- Es una variable temporal
+                                      if var = VAR_NUL then
+                                          put(f3as, "VAR_NUL");
+                                      else
+                                          put(f3as, "tmp_" &
                                           esborra_primer_car(var'img));
+                                      end if;
+                                  else
+                                      put(f3as, consulta(tn, t_var(var).id));
+                                      put(f3as, esborra_primer_car(var'img));
                                   end if;
-                              else
-                                  put(f3as, consulta(tn, t_var(var).id));
-                                  put(f3as, esborra_primer_car(var'img));
-                              end if;
             when t_v_const => if t_var(var).val < 0 then
                                   put(f3as, t_var(var).val'img);
-                              else
+                              else                                  
+                                  put(f3as, "'var: " & var'img & "'");
                                   put(f3as,
                                       esborra_primer_car(t_var(var).val'img));
                               end if;
@@ -197,7 +221,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => VAR_NUL,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_copia;
     
@@ -207,7 +231,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_consind;
     
@@ -217,7 +241,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_copiaind;
     
@@ -227,7 +251,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => VAR_NUL,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_neg;
     
@@ -237,7 +261,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_suma;
     
@@ -247,7 +271,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_resta;
     
@@ -257,7 +281,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_prod;
     
@@ -267,7 +291,7 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_divisio;
     
@@ -277,129 +301,129 @@ package body p_semantica.gcodi.gcodi3a is
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_modul;
     
     procedure gen_ins_and (opd, opf1, opf2 : in     num_var) is
     begin
-        gen_i3a((tins       => ins_and,
+        gen_i3a((tins    => ins_and,
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_and;
     
     procedure gen_ins_or (opd, opf1, opf2 : in     num_var) is
     begin
-        gen_i3a((tins       => ins_or,
+        gen_i3a((tins    => ins_or,
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_or;
     
     procedure gen_ins_not (opd, opf1 : in     num_var) is
     begin
-        gen_i3a((tins       => ins_not,
+        gen_i3a((tins    => ins_not,
                  opdesti => opd,
                  opf1    => opf1,
                  opf2    => VAR_NUL,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_not;
     
     procedure gen_ins_etiq (ope : in     t_etiqueta) is
     begin
-        gen_i3a((tins       => ins_etiq,
+        gen_i3a((tins    => ins_etiq,
                  opdesti => VAR_NUL,
                  opf1    => VAR_NUL,
                  opf2    => VAR_NUL,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => ope));
     end gen_ins_etiq;
     
     procedure gen_ins_goto (ope : in     t_etiqueta) is
     begin
-        gen_i3a((tins       => ins_goto,
+        gen_i3a((tins    => ins_goto,
                  opdesti => VAR_NUL,
                  opf1    => VAR_NUL,
                  opf2    => VAR_NUL,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => ope));
     end gen_ins_goto;
     
     procedure gen_ins_if_lt (opf1, opf2 : in     num_var;
                              ope        : in     t_etiqueta) is
     begin
-        gen_i3a((tins       => ins_iflt,
+        gen_i3a((tins    => ins_iflt,
                  opdesti => VAR_NUL,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => ope));
     end gen_ins_if_lt;
     
     procedure gen_ins_if_leq (opf1, opf2 : in     num_var;
                               ope        : in     t_etiqueta) is
     begin
-        gen_i3a((tins       => ins_ifleq,
+        gen_i3a((tins    => ins_ifleq,
                  opdesti => VAR_NUL,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => ope));
     end gen_ins_if_leq;
     
     procedure gen_ins_if_eq (opf1, opf2 : in     num_var;
                              ope        : in     t_etiqueta) is
     begin
-        gen_i3a((tins       => ins_ifeq,
+        gen_i3a((tins    => ins_ifeq,
                  opdesti => VAR_NUL,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => ope));
     end gen_ins_if_eq;
     
     procedure gen_ins_if_neq (opf1, opf2 : in     num_var;
                               ope        : in     t_etiqueta) is
     begin
-        gen_i3a((tins       => ins_ifneq,
+        gen_i3a((tins    => ins_ifneq,
                  opdesti => VAR_NUL,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => ope));
     end gen_ins_if_neq;
     
     procedure gen_ins_if_geq (opf1, opf2 : in     num_var;
                               ope        : in     t_etiqueta) is
     begin
-        gen_i3a((tins       => ins_ifgeq,
+        gen_i3a((tins    => ins_ifgeq,
                  opdesti => VAR_NUL,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => ope));
     end gen_ins_if_geq;
     
     procedure gen_ins_if_gt (opf1, opf2 : in     num_var;
                              ope        : in     t_etiqueta) is
     begin
-        gen_i3a((tins       => ins_ifgt,
+        gen_i3a((tins    => ins_ifgt,
                  opdesti => VAR_NUL,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => ope));
     end gen_ins_if_gt;
     
     procedure gen_ins_call (opp : in     num_proc) is
     begin
-        gen_i3a((tins       => ins_call,
+        gen_i3a((tins    => ins_call,
                  opdesti => VAR_NUL,
                  opf1    => VAR_NUL,
                  opf2    => VAR_NUL,
@@ -409,7 +433,7 @@ package body p_semantica.gcodi.gcodi3a is
     
     procedure gen_ins_rtn (opp : in     num_proc) is
     begin
-        gen_i3a((tins       => ins_return,
+        gen_i3a((tins    => ins_return,
                  opdesti => VAR_NUL,
                  opf1    => VAR_NUL,
                  opf2    => VAR_NUL,
@@ -419,7 +443,7 @@ package body p_semantica.gcodi.gcodi3a is
     
     procedure gen_ins_prmb (opp : in     num_proc) is
     begin
-        gen_i3a((tins       => ins_preambul,
+        gen_i3a((tins    => ins_preambul,
                  opdesti => VAR_NUL,
                  opf1    => VAR_NUL,
                  opf2    => VAR_NUL,
@@ -429,21 +453,21 @@ package body p_semantica.gcodi.gcodi3a is
     
     procedure gen_ins_params (opf1 : in     num_var) is
     begin
-        gen_i3a((tins       => ins_params,
+        gen_i3a((tins    => ins_params,
                  opdesti => VAR_NUL,
                  opf1    => opf1,
                  opf2    => VAR_NUL,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_params;
     
     procedure gen_ins_paramc (opf1, opf2 : in     num_var) is
     begin
-        gen_i3a((tins       => ins_paramc,
+        gen_i3a((tins    => ins_paramc,
                  opdesti => VAR_NUL,
                  opf1    => opf1,
                  opf2    => opf2,
-                 opproc  => proc_nul,
+                 opproc  => PROC_NUL,
                  opetiq  => 0));
     end gen_ins_paramc;
     

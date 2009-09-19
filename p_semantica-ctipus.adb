@@ -1,6 +1,10 @@
-with p_semantica.missatges, ada.text_io;
-
-use  p_semantica.missatges, ada.text_io;
+with decls.p_taula_noms, decls.p_taula_simbols, decls.dec_generals, 
+     decls.p_descripcio, decls.p_atributs, p_semantica.missatges,
+     ada.text_io, ada.integer_text_io, p_semantica.gcodi, decls.d_codi;
+     
+use  decls.p_taula_noms, decls.p_taula_simbols, decls.dec_generals, 
+     decls.p_descripcio, decls.p_atributs, p_semantica.missatges,
+     ada.text_io, ada.integer_text_io, p_semantica.gcodi, decls.d_codi;
 
 package body p_semantica.ctipus is
 
@@ -321,6 +325,7 @@ package body p_semantica.ctipus is
         
         nv := nv + 1;
         dv := (dvar, c_decl_var.var_idt, nv);
+        put_line("--ct_decl_var, iden.id: " & iden.id'img);
         posa(ts, iden.id, dv, e);
         
         if e then
