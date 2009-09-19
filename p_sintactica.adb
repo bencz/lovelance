@@ -221,6 +221,7 @@ begin
     -- initialize by pushing state 0 and getting the first input symbol
     yy.state_stack(yy.tos) := 0;
 
+
     loop
 
         yy.index := shift_reduce_offset(yy.state_stack(yy.tos));
@@ -588,49 +589,49 @@ yy.value_stack(yy.tos-2),
 yy.value_stack(yy.tos));
 
 when  63 =>
---#line  263
+--#line  261
 rs_sent_if;
 
 when  64 =>
---#line  265
+--#line  263
 rs_sent_if_else(
 yy.value_stack(yy.tos-4));
 
 when  65 =>
---#line  270
+--#line  268
 rs_p_sent_if(
 yy.value_stack(yy.tos-1));
 
 when  66 =>
---#line  274
+--#line  272
 rs_m_if(
 yyval);
 
 when  67 =>
---#line  279
+--#line  277
 rs_sent_while(
 yy.value_stack(yy.tos-4));
 
 when  68 =>
---#line  284
+--#line  282
 rs_p_sent_while(
 yyval, 
 yy.value_stack(yy.tos-2), 
 yy.value_stack(yy.tos-1));
 
 when  69 =>
---#line  288
+--#line  286
 rs_m_while(
 yyval);
 
 when  70 =>
---#line  293
+--#line  291
 rs_sent_assig(
 yy.value_stack(yy.tos-3), 
 yy.value_stack(yy.tos-1));
 
 when  71 =>
---#line  298
+--#line  296
 rs_sent_crid(
 yy.value_stack(yy.tos-1));
 
@@ -659,6 +660,7 @@ yy.value_stack(yy.tos-1));
 
 
     end loop;
+
 
 end yyparse;
 end p_sintactica;

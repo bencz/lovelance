@@ -1,5 +1,5 @@
-with decls.dec_generals, decls.p_descripcio;
-use  decls.dec_generals, decls.p_descripcio;
+with decls.dec_generals, decls.p_descripcio, ada.text_io;
+use  decls.dec_generals, decls.p_descripcio, ada.text_io;
 
 package decls.p_taula_simbols is
 
@@ -7,6 +7,7 @@ package decls.p_taula_simbols is
     error_consultacamp : exception;
     error_posaindex    : exception;
     error_succindex    : exception;
+    error_succarg      : exception;
 
     type t_taula_simbols is limited private;
 
@@ -28,7 +29,7 @@ package decls.p_taula_simbols is
 
     procedure posacamp (ts       : in out t_taula_simbols;
                         idr, idc : in     id_nom;
-                        d        : in     descr;
+                        dc       : in     descr;
                         e        :    out boolean);
 
     function conscamp (ts       : in     t_taula_simbols;
@@ -72,6 +73,13 @@ package decls.p_taula_simbols is
     procedure actualitza (ts : in out t_taula_simbols;
                           id : in     id_nom;
                           d  : in     descr);
+    
+    procedure actualitza_arg (ts   : in out t_taula_simbols; 
+                              inda : in     indexarg; 
+                              da   : in     descr);
+                              
+    -- Funcions de debugging                          
+    procedure imprimir (ts : in t_taula_simbols);
 
 private
 

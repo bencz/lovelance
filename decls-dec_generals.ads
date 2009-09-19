@@ -3,8 +3,8 @@ package decls.dec_generals is
     pragma pure;
 
     --longituds mitjanes d'identificadors i strings
-    LONG_ID  : constant integer := 10;
-    LONG_STR : constant integer := 30;
+    LONG_ID  : constant integer := 50;
+    LONG_STR : constant integer := 200;
 
     MAX_IDENTIFICADORS : constant integer   := 255;  --aprox. a n. primers
     MAX_STRINGS        : constant integer   := 30;

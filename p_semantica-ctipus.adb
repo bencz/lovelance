@@ -136,7 +136,7 @@ package body p_semantica.ctipus is
             end if;
             
             posa (ts, idarg, darg, e);
-            actualitza (ts, idarg, darg);
+            actualitza_arg(ts, indxarg, darg);
             indxarg := succarg (ts, indxarg);
         end loop;
         
