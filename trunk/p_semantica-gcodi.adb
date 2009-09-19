@@ -1,24 +1,29 @@
-with p_semantica.gcodi.gcodi3a;
-use  p_semantica.gcodi.gcodi3a;
-
-with ada.Text_IO; use ada.Text_IO;
+with p_semantica.gcodi.gcodi3a, ada.text_io;
+use  p_semantica.gcodi.gcodi3a, ada.text_io;
 
 package body p_semantica.gcodi is
 
     function nova_var(iden : in     id_nom) return num_var is
     begin
         nv := nv + 1;
+        put_line("nv: " & nv'img);
+        put_line("nova var, t_var(nv).id: " & t_var(nv).id'img);
+        put_line("iden: " & iden'img);
         t_var(nv) := (tv   => t_v_iden,
                       np   => cim(p_procs),
                       ocup => 4,
                       desp => 0,
                       id   => iden);
+        put_line("nova var, t_var(nv).id: " & t_var(nv).id'img);
         return nv;
     end nova_var;
 
     function nova_const (v : in     valor) return num_var is
     begin
         nv := nv + 1;
+        put_line("nv: " & nv'img);
+        put_line("nova const, t_var(nv).id: " & t_var(nv).id'img);
+        put_line("v: " & v'img);
         t_var(nv) := (tv   => t_v_const,
                       val  => v,
                       id   => ID_NUL,
@@ -36,6 +41,7 @@ package body p_semantica.gcodi is
 
     procedure ins_var(var : in t_variable) is
     begin
+        put_line("ins_var, nv: " & nv'img);
         t_var(nv) := var;
     end ins_var;
 
@@ -46,6 +52,8 @@ package body p_semantica.gcodi is
 
     procedure prepara_gcodi (nom : in     string)is
     begin
+        put_line("prepara_gcodi, nv: " & nv'img);
+        put_line("t_var(8).id: " & t_var(8).id'img);
         buida(p_procs);
         buida(p_params);
         buida(p_etiq);
@@ -57,7 +65,7 @@ package body p_semantica.gcodi is
         ocup_v:despl;
     begin
         -- Calculam el desplaçament de les variables
-    
+        put_line("conclou_codi1, t_var(8).id: " & t_var(8).id'img);
         for p in 1..np loop
             t_proc(p).ocup_vl := 0;
         end loop;
@@ -75,7 +83,7 @@ package body p_semantica.gcodi is
                 t_var(v).desp := (t_var(v).desp*(-4)) + 8;
             end if;
         end loop;
-      
+        put_line("conclou_codi2, t_var(8).id: " & t_var(8).id'img);
         conclou_fitxer_codi;
     end conclou_gcodi;
 
@@ -131,10 +139,10 @@ package body p_semantica.gcodi is
     procedure gc_encap_p_encap (p_encap : in     t_atribut) is
     -- ENCAP:
     --     P_ENCAP s_partancat
-        ia         : indexarg;
-        d, dt      : descr;
-        idarg      : id_nom;
-        nvar       : num_var;
+        ia     : indexarg;
+        d, dt  : descr;
+        idarg  : id_nom;
+        nvar   : num_var;
         n_args : despl;
     begin
         t_proc(np).id   := p_encap.id;
@@ -224,6 +232,8 @@ package body p_semantica.gcodi is
         d := cons (ts, iden.id);
         dt := cons (ts, d.tv);
         nvar := d.nv;
+        put_line("gc_decl_var, nvar: " & nvar'img);
+        put_line("gc_decl_var, iden.id: " & iden.id'img);
         t_var(nvar) :=(tv   => t_v_iden,
                        np   => cim(p_procs),
                        ocup => dt.dt.ocup,
@@ -378,12 +388,12 @@ package body p_semantica.gcodi is
         dc := conscamp(ts, ref1.ref_idt, iden.id);
         
         case ref1.ref_d is
-            when 0      => t  := nova_var(ID_NUL);
-                           c  := nova_const(valor(dc.dsp));
-                           gen_ins_copia(t, c);
-            when others => t  := nova_var(ID_NUL);
-                           tc := nova_const(valor(dc.dsp));
-                           gen_ins_suma(t, ref1.ref_d, tc);
+            when VAR_NUL => t  := nova_var(ID_NUL);
+                            c  := nova_const(valor(dc.dsp));
+                            gen_ins_copia(t, c);
+            when others  => t  := nova_var(ID_NUL);
+                            tc := nova_const(valor(dc.dsp));
+                            gen_ins_suma(t, ref1.ref_d, tc);
         end case;
         
         ref0.ref_b := ref1.ref_b;
@@ -407,15 +417,17 @@ package body p_semantica.gcodi is
             n1 := nova_const(valor(dt.dt.ocup));
             gen_ins_prod(t1, prmb_rind.prmb_d, n1);
             t2 := nova_var(ID_NUL);
+            put_line("--------passam per aqui");
+            put_line(valor(da.dt.b)'img);
             n2 := nova_const(valor(da.dt.b));
             gen_ins_resta(t2, t1, n2);
             ref.ref_b := prmb_rind.prmb_r;
             
             case prmb_rind.prmb_db is
-                when 0      => ref.ref_d := t2;
-                when others => t3:=nova_var(ID_NUL);
-                               gen_ins_suma(t3, prmb_rind.prmb_db, t2);
-                               ref.ref_d := t3;
+                when VAR_NUL => ref.ref_d := t2;
+                when others  => t3:=nova_var(ID_NUL);
+                                gen_ins_suma(t3, prmb_rind.prmb_db, t2);
+                                ref.ref_d := t3;
             end case;
         end if;
     end gc_ref_prmb_rind;

@@ -1,9 +1,5 @@
-with decls.dec_generals, decls.p_i3a,
-     ada.sequential_io,  ada.text_io,
-     decls.d_codi, decls.p_f_c3a_binari;
-use  decls.dec_generals, decls.p_i3a,
-     decls.d_codi,       ada.text_io,
-     decls.p_f_c3a_binari;
+with decls.p_i3a, decls.p_f_c3a_binari;
+use decls.p_i3a, decls.p_f_c3a_binari;
 
 package p_semantica.gcodi.gcodi3a is
 

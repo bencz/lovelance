@@ -1,8 +1,8 @@
 with decls.p_i3a, p_semantica.gcodi.gcodi3a,
-     ada.text_io;
+     ada.text_io, decls.p_f_c3a_binari;
 
 use  decls.p_i3a, p_semantica.gcodi.gcodi3a,
-     ada.text_io;
+     ada.text_io, decls.p_f_c3a_binari;
     
 package body p_semantica.gcodi.assemblador is
 
@@ -785,7 +785,8 @@ package body p_semantica.gcodi.assemblador is
 
 
     procedure genera_assemblador (nom : in     string) is
-        ic3a : i3a;
+        ic3a  : i3a;
+        fi3ab : decls.p_f_c3a_binari.file_type;
     begin
         proc_actual := np;
         open(fi3ab, in_file, nom & ".c3a");

@@ -164,7 +164,7 @@ package body decls.p_taula_simbols is
         ts.ta(ts.nprof) := ts.ta(ts.nprof) + 1;
         ts.ndespl := ts.ta(ts.nprof);
         ts.tdp(ts.ndespl) := (id => idc,
-                              p  => -1,
+                              p  => 0,
                               d  => d,
                               s  => ts.tdc(idr).s);                
         ts.tdc(idr).s := ts.ndespl;
@@ -259,7 +259,7 @@ package body decls.p_taula_simbols is
         ts.ta(ts.nprof) := ts.ta(ts.nprof) + 1;
         pdesp := ts.ta(ts.nprof);
         ts.tdp (pdesp) := (id => idi,
-                           p  => -1,
+                           p  => 0,
                            d  => d,
                            s  => 0);
         
@@ -333,7 +333,7 @@ package body decls.p_taula_simbols is
         
         ts.ta(ts.nprof) := ts.ta(ts.nprof) + 1;
         ts.ndespl := ts.ta(ts.nprof);
-        ts.tdp (ts.ndespl) := (ida, -1, d, 0);
+        ts.tdp (ts.ndespl) := (ida, 0, d, 0);
         
         if pdespp = 0 then
             ts.tdc(idp).s := ts.ndespl;

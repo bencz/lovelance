@@ -74,8 +74,6 @@ package decls.p_taula_simbols is
                           d  : in     descr);
 
 private
-   
---    type nambits is new integer range -1..MAX_AMBITS;
 
     type node_descr is
         record

@@ -1,9 +1,3 @@
-with decls.p_taula_noms, decls.p_taula_simbols, decls.dec_generals, 
-     decls.p_descripcio, decls.p_atributs;
-
-use  decls.p_taula_noms, decls.p_taula_simbols, decls.dec_generals,
-     decls.p_descripcio, decls.p_atributs;
-
 package p_semantica.ctipus is
 
     procedure ct_prog (decl_prog : in     t_atribut;

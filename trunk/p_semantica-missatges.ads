@@ -229,6 +229,6 @@ package p_semantica.missatges is
                                 col : in     natural);
                           
 private
-    f_missatges: file_type;
+    f_missatges: ada.text_io.file_type;
 
 end p_semantica.missatges;
