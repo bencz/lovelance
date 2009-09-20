@@ -613,12 +613,16 @@ package body p_semantica.ctipus is
             -- No existeix el tipus
             raise err;
         end if;
-        
+
         dta := cons(ts, p_array.arr_ida);
-        dta.dt.ocup  := despl(integer(dta.dt.ocup) *
-                              integer(p_array.arr_ncomp));
+        put_line("ct_decl_array, dta.dt.ocup: " & dta.dt.ocup'img);
+        dta.dt.ocup  := despl(integer(p_array.arr_ncomp) *
+                              integer(dtb.dt.ocup));
+        put_line("ct_decl_array, dta.dt.ocup: " & dta.dt.ocup'img);
+        dta.dt.b := p_array.arr_b * dtb.dt.ocup;
         dta.dt.tcomp := iden.id;        
         actualitza(ts, p_array.arr_ida, dta);
+
         
         exception
             when err     => me_no_tipus (iden.linia,
