@@ -1,9 +1,71 @@
 procedure ordenacio_quicksort is
+
    type index is new integer range 1 .. 10;
    type taula is array (index) of integer;
+
    a: taula;
+
+   procedure particio (i : in      index; 
+                             j : in      index; 
+                             r :    out index;
+                             l :    out index; 
+                            x : in      integer) is
+      aux: integer;
+   begin
+      l := i; 
+      r := j;
+      while l <= r loop
+         while a(l) < x loop 
+            l := l + 1; 
+         end loop;
+         while a(r) > x loop 
+            r := r - 1; 
+         end loop;
+         if l <= r then
+            aux := a(l);
+            a(l) := a(r);
+            a(r) := aux;
+            l := l + 1; 
+            r := r - 1;
+         end if;
+      end loop;
+   end particio;
+
+   procedure quicksort (i: in index; 
+                               j: in index) is
+      r, l : index;
+   begin
+      if i < j then
+         particio(i, j, r, l, a(i));
+         quicksort(i, r);
+         quicksort(l, j);
+      end if;
+   end quicksort;
+
    i: index;
+
 begin
+
+   puts("Introdueix 10 nombres enters per ser ordenats:");
+   new_line;
+
    i := 1;
-   a(i) := 5;
+   while i <= 10 loop
+      geti(a(i));
+      i := i + 1;
+   end loop;
+
+   quicksort(1, 10);
+
+   i := 1;
+   new_line;
+   puts("Nombres ordenats:");
+   new_line;
+   
+   while i <= 10 loop
+      puti(a(i));
+      new_line;
+      i := i + 1;
+   end loop;
 end ordenacio_quicksort;
+

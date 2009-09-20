@@ -417,7 +417,12 @@ package body p_semantica.gcodi is
             n1 := nova_const(valor(dt.dt.ocup));
             gen_ins_prod(t1, prmb_rind.prmb_d, n1);
             t2 := nova_var(ID_NUL);
+            put_line("prmb.rind.prmb_idt: " & prmb_rind.prmb_idt'img);
             put_line("--------passam per aqui");
+            put_line("da.dt.b: " & da.dt.b'img);
+            --imprimir(ts);
+            --t3:= nova_var(1000); --DEBUG Para que de Constraint error
+
             put_line(valor(da.dt.b)'img);
             n2 := nova_const(valor(da.dt.b));
             gen_ins_resta(t2, t1, n2);

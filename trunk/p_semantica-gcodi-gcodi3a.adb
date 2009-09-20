@@ -34,19 +34,19 @@ package body p_semantica.gcodi.gcodi3a is
             when t_v_iden     =>  --put_line("t_var(var).id: " & t_var(var).id'img);
                                   --put_line("id: " & id'img);
                                   --put_line("var: " & var'img);
-                                  put_line("i - var - id - t_var(i).id");
-                                  for i in num_var loop
-                                      if t_var(i).id /= 0 then
-                                          put(i'img);
-                                          put(" - ");
-                                          put(var'img);
-                                          put(" - ");
-                                          put(id'img);
-                                          put(" - ");
-                                          put(t_var(i).id'img); 
-                                          new_line;
-                                      end if;
-                                  end loop;
+--                                  put_line("i - var - id - t_var(i).id");
+--                                  for i in num_var loop
+--                                      if t_var(i).id /= 0 then
+--                                          put(i'img);
+--                                          put(" - ");
+--                                          put(var'img);
+--                                          put(" - ");
+--                                          put(id'img);
+--                                          put(" - ");
+--                                          put(t_var(i).id'img); 
+--                                          new_line;
+--                                      end if;
+--                                  end loop;
 
                                   if t_var(var).id = ID_NUL then
                                       put_line("es temporal");
@@ -63,8 +63,7 @@ package body p_semantica.gcodi.gcodi3a is
                                   end if;
             when t_v_const => if t_var(var).val < 0 then
                                   put(f3as, t_var(var).val'img);
-                              else                                  
-                                  put(f3as, "'var: " & var'img & "'");
+                              else   
                                   put(f3as,
                                       esborra_primer_car(t_var(var).val'img));
                               end if;

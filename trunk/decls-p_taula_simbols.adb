@@ -323,9 +323,11 @@ package body decls.p_taula_simbols is
                                     put(ftd, "null");
                    when tsbool |
                         tscar  |
-                        tsent    => put(ftd, "linf: " & d.dt.linf'img & "   ");
+                        tsent    => put(ftd, "tsbool | tscar | tsent   ");
+                                    put(ftd, "linf: " & d.dt.linf'img & "   ");
                                     put(ftd, "lsup: " & d.dt.lsup'img); 
-                   when tsarr    => put(ftd, "b: " & d.dt.b'img & "   ");
+                   when tsarr    => put(ftd, "tsarr   ");
+                                    put(ftd, "b: " & d.dt.b'img & "   ");
                                     put(ftd, "tcomp: " & d.dt.tcomp'img);
                    when tsrec    => put(ftd, "tsrec   ");
                                     put(ftd, "null");
@@ -368,9 +370,11 @@ package body decls.p_taula_simbols is
                                    put(ftdp, "null");
                   when tsbool |
                        tscar  |
-                       tsent    => put(ftdp, "linf: " & d.dt.linf'img & "   ");
+                       tsent    => put(ftdp, "tsbool | tscar | tsent   ");
+                                   put(ftdp, "linf: " & d.dt.linf'img & "   ");
                                    put(ftdp, "lsup: " & d.dt.lsup'img); 
-                  when tsarr    => put(ftdp, "b: " & d.dt.b'img & "   ");
+                  when tsarr    => put(ftdp, "tsarr   ");
+                                   put(ftdp, "b: " & d.dt.b'img & "   ");
                                    put(ftdp, "tcomp: " & d.dt.tcomp'img);
                   when tsrec    => put(ftdp, "tsrec   ");
                                    put(ftdp, "null");

@@ -26,8 +26,8 @@ package body p_semantica is
         finalitza_missatges;
         conclou_gcodi;
         e := error;
-        imprimir(tn);  --DEBUG
-        imprimir(ts);  --DEBUG
+        --imprimir(tn);  --DEBUG
+        --imprimir(ts);  --DEBUG
     end conclou_analisi;
     
 
