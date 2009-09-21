@@ -1,0 +1,59 @@
+procedure bubblesort is
+    type index is new integer range 1 .. 10;
+	type taula is array (index) of integer;
+	a : taula;
+	i, j : index;
+    
+	procedure intercamvia(v1 : in out integer; v2 : in out integer) is
+        aux : integer;
+	begin
+        aux := v1;
+        v1 := v2;
+        v2 := aux;
+	end intercamvia;
+    
+	procedure omple(t : in out taula) is
+	begin
+		i := 1;
+		while i <= 10 loop
+			puts("Introdueix un nombre: ");
+			geti(t(i));
+			new_line;
+			i := i + 1;
+		end loop;
+	end omple;
+
+	procedure imprimeix(t : in out taula) is
+	begin
+		i := 1;
+		while i <= 10 loop
+			puti(t(i));
+            new_line;
+			i := i + 1;
+		end loop;
+	end imprimeix;
+
+	procedure bimbolla(t : in out taula) is
+	begin
+		i := 1;
+		while i < 10 loop
+	     		j := 10;
+	     		while j > 1 loop
+                    if t(j) < t(j-1) then
+                        intercamvia(t(j), t(j-1));
+                    end if;
+                    j := j - 1;
+	     		end loop;
+	     		i := i + 1;
+        end loop;
+	end bimbolla;
+    
+begin
+    puts("Bubblesort de 10 nombres enters:");
+    new_line;
+	omple(a);
+	bimbolla(a);
+    puts("Nombres ordenats:");
+    new_line;
+	imprimeix(a);
+end bubblesort;

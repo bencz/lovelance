@@ -1,24 +1,29 @@
-procedure prova_factorial is
-   
-   procedure factorial(x: in integer; res: out integer) is
-      t: integer;
-   begin
-      t := x;
-      res := x;
+procedure factorial is
 
-      while t > 1 loop
-          t := t - 1;
-          res := res * t;
-      end loop;
-   end factorial;
+    procedure fact(x: in out integer; res: out integer) is
+        t : integer;
+    begin
+        t := x;
+        res := x;
+        while t > 1 loop
+            t := t - 1;
+            res := res * t;
+        end loop;
+    end fact;
 
-   var, f: integer;
-
+    var, f: integer;
+    
 begin
-   var := 5;
-   puts("Introdueix un nombre: ");
-   geti(var);
-   puts("Factorial: ");
-   factorial(var, f);
-   puti(f);
-end prova_factorial;
+    puts("Introdueix un nombre: ");
+    geti(var);
+    
+    if var < 0 then
+        puts("Aquest factorial no es pot calcular.");
+        new_line;
+    else
+        puts("El seu factorial es: ");
+        fact(var, f);
+        puti(f);
+        new_line;
+    end if;
+end factorial;

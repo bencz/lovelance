@@ -49,7 +49,6 @@ package body p_semantica.gcodi.gcodi3a is
 --                                  end loop;
 
                                   if t_var(var).id = ID_NUL then
-                                      put_line("es temporal");
                                       -- Es una variable temporal
                                       if var = VAR_NUL then
                                           put(f3as, "VAR_NUL");

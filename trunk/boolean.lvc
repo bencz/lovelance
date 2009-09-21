@@ -1,0 +1,91 @@
+procedure bool is
+    b1, b2, b3, b4: boolean;
+begin
+    b1 := true;
+    b2 := true;
+    b3 := false;
+    b4 := false;
+   
+    new_line;
+    puts("false AND false: ");
+    if b3 and b4 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+   
+    puts("false AND true: ");
+    if b3 and b1 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+   
+    puts("true AND false: ");
+    if b1 and b3 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+   
+    puts("true AND true: ");
+    if b1 and b2 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+   
+    new_line;
+    puts("false OR false: ");
+    if b3 or b4 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+   
+    puts("false OR true: ");
+    if b3 or b1 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+   
+    puts("true OR false: ");
+    if b1 or b3 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+   
+    puts("true OR true: ");
+    if b1 or b2 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+
+    new_line;
+    puts("NOT true: ");
+    if not b1 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+    
+    puts("NOT false: ");
+    if not b3 then
+        puts("true");
+    else
+        puts("false");
+    end if;
+    new_line;
+end bool;

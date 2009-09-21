@@ -7,7 +7,7 @@ package decls.dec_generals is
     LONG_STR : constant integer := 200;
 
     MAX_IDENTIFICADORS : constant integer   := 255;  --aprox. a n. primers
-    MAX_STRINGS        : constant integer   := 30;
+    MAX_STRINGS        : constant integer   := 40;
     MAX_AMBITS         : constant integer   := 30;
     MAX_PROCS          : constant integer   := MAX_IDENTIFICADORS;
     MAX_VARS           : constant integer   := MAX_IDENTIFICADORS;
