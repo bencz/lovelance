@@ -1,30 +1,30 @@
 procedure prog_mcd is
-   var1, var2, var3: integer;
+    var1, var2, var3: integer;
 
-   procedure mcd(a: in integer; b: in integer; c: out integer) is
-      a0, b0: integer;
-   begin
-            
-      a0 := a;
-      b0 := b;
-      While a0 /= b0 loop
-         if a0 > b0 then
-            a0 := a0 - b0;
-         else
-            b0 := b0 - a0;
-         end if;
-      end loop;
-      c := a0;
-   end mcd;
+    procedure mcd(a: in out integer; b: in out integer; c: out integer) is
+        a0, b0: integer;
+    begin
+        a0 := a;
+        b0 := b;
+        while a0 /= b0 loop
+            if a0 > b0 then
+                a0 := a0 - b0;
+            else
+                b0 := b0 - a0;
+            end if;
+        end loop;
+        c := a0;
+    end mcd;
 
 begin
-   puts("Introdueix valor 1: ");
-   geti(var1);
-   puts("Introdueix valor 2: ");
-   geti(var2);
-
-   mcd(var1, var2, var3);
-
-   puts("El valor del mcd es: ");
-   puti(var3);
+    puts("Introdueix valor 1: ");
+    geti(var1);
+    puts("Introdueix valor 2: ");
+    geti(var2);
+    
+    mcd(var1, var2, var3);
+    
+    puts("El valor del mcd es: ");
+    puti(var3);
+    new_line;
 end prog_mcd;

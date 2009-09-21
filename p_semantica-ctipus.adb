@@ -325,7 +325,6 @@ package body p_semantica.ctipus is
         
         nv := nv + 1;
         dv := (dvar, c_decl_var.var_idt, nv);
-        put_line("--ct_decl_var, iden.id: " & iden.id'img);
         posa(ts, iden.id, dv, e);
         
         if e then
@@ -615,10 +614,8 @@ package body p_semantica.ctipus is
         end if;
 
         dta := cons(ts, p_array.arr_ida);
-        put_line("ct_decl_array, dta.dt.ocup: " & dta.dt.ocup'img);
         dta.dt.ocup  := despl(integer(p_array.arr_ncomp) *
                               integer(dtb.dt.ocup));
-        put_line("ct_decl_array, dta.dt.ocup: " & dta.dt.ocup'img);
         dta.dt.b := p_array.arr_b * dtb.dt.ocup;
         dta.dt.tcomp := iden.id;        
         actualitza(ts, p_array.arr_ida, dta);

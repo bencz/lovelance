@@ -51,6 +51,7 @@ begin
     i := i / i;
     i := i mod i;
     i := i*10+j*2-(30*i-15*2*j);
+    i := 10;
     
     suma(i, j, k);
     noarguments;
@@ -76,13 +77,15 @@ begin
        putc(car);
     end if;
     
+    i := 1;
     while (i /= 15) and not b loop
-	if d and b then
+	    if d and b then
             puti(i);
         else
            putc(car);
         end if;
-        puti(i);
-	putc(car);
+        puti(i*2);
+	    putc(car);
+        i := i + 1;
     end loop;
 end prova;

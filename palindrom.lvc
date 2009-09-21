@@ -1,48 +1,48 @@
-procedure FrasePalindrom is
+procedure frase_palindrom is
     type subrang is new integer range 1..100;
-    type contingut is array (subrang) of character;
-    type frase is record
-        cont: contingut;
-        long: subrang;
-    end record;
+    type frase is array (subrang) of character;
+    
+    f : frase;
+    long : subrang;
+    c : character;
+    palindrom : boolean;
 
-    f: frase;
-    c: character;
-    palindrom: boolean;
-
-    procedure llegirfrase is
+    procedure llegir_frase is
     begin
         getc(c);
-        f.long:=0;
-        while c/='.' loop
-            if c/=' ' then
-                f.long:=f.long+1;
-                f.cont(f.long):=c;
+        long := 0;
+        while c /= '.' loop
+            if c /= ' ' then
+                long := long + 1;
+                f(long) := c;
             end if;
             getc(c);
         end loop;
-    end llegirfrase;
+    end llegir_frase;
     
-    procedure mirarsilafraseespalindrom is
-        i, j: subrang;
+    procedure es_palindrom is
+        i, j : subrang;
     begin
-        palindrom:=false;
-        i:=1;
-        j:=f.long;
-        while f.cont(i)=f.cont(j) and i<(j-2) loop
-            i:=i+1;
-            j:=j-1;
+        palindrom := false;
+        i := 1;
+        j := long;
+        while (f(i) = f(j)) and (i < (j - 2)) loop
+            i := i + 1;
+            j := j - 1;
         end loop;
-        palindrom:= f.cont(i)=f.cont(j);
-    end mirarsilafraseespalindrom;
+        palindrom := (f(i) = f(j));
+    end es_palindrom;
     
     begin
-        llegirfrase;
-        mirarsilafraseespalindrom;
+        puts("Introdueix una frase acabada en punt: ");
+        new_line;
+        llegir_frase;
+        es_palindrom;
         new_line;
         if palindrom then 
             puts("La frase es un palindrom");
         else 
             puts("La frase no es un palindrom");
         end if;
-end frasepalindrom;
+        new_line;
+end frase_palindrom;
