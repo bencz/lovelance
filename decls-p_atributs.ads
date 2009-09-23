@@ -29,8 +29,8 @@ package decls.p_atributs is
                                 exp_tsub   : tipus_subjacent;
                                 exp_mde    : mde_exp;
                                 exp_idb    : id_nom;
-                                exp_res	   : num_var;
-                                exp_d	   : num_var;
+                                exp_res	 : num_var;
+                                exp_d	 : num_var;
                 when ref     => ref_idb    : id_nom;
                                 ref_tip    : t_ref;
                                 ref_idt    : id_nom;

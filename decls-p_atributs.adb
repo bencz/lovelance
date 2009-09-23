@@ -14,7 +14,6 @@ package body decls.p_atributs is
             when error   => null;
     end valor_lit;
     
-    --posar el tipus tsbool? Afegir el tipus d'atribut tsstr?
     function tsub_lit  (lit : t_atribut) return tipus_subjacent is
     begin
         case lit.a is

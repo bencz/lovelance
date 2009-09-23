@@ -7,7 +7,6 @@ package body decls.p_taula_simbols is
             ts.tdc(i) := (0, d, 0);
         end loop;
         ts.nprof := 1;
-        --ts.ta(ts.nprof) := 0;
     end tbuida;
 
 
@@ -403,6 +402,6 @@ package body decls.p_taula_simbols is
         close(ftd);
         close(ftdp);
         close(fa);
-    end;
+    end imprimir;
 
 end decls.p_taula_simbols;
