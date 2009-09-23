@@ -540,7 +540,8 @@ package body p_semantica.ctipus is
                            iden2    : in     t_atribut;
                            error    : in out boolean) is
     -- P_RECORD:
-    --     pc_type identificador pc_is pc_record identificador s_dospunts identificador s_punticoma
+    --     pc_type identificador pc_is pc_record identificador 
+    --     s_dospunts identificador s_punticoma
     
         dr, dtc, dc: descr;
         tdr : descr_tipus;
@@ -928,7 +929,6 @@ package body p_semantica.ctipus is
     --     identificador
     
         d, dtid : descr;
-        --ind     : indexarg;
     begin
         d     := cons(ts, iden.id);
         refer := (linia    => iden.linia,
